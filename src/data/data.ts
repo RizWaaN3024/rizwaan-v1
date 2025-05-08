@@ -7,7 +7,7 @@ export interface NavLink {
     link: string;
 }
 
-interface SocialLink {
+export interface SocialLink {
     id: number;
     label: string;
     icon: React.ElementType;
