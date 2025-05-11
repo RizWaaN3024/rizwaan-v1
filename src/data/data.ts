@@ -22,7 +22,17 @@ export const NAV_LINKS: NavLink[] = [
     }, 
     {
         id: 2,
+        label: "About",
+        link: "/about"
+    }, 
+    {
+        id: 3,
         label: "Blogs",
+        link: "/blog"
+    },
+    {
+        id: 4,
+        label: "Contact",
         link: "/blog"
     }
 ]
