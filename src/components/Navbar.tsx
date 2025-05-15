@@ -1,6 +1,5 @@
-import { NAV_LINKS, NavLink, SOCIAL_LINKS, SocialLink } from '@/data/data'
+import { NAV_LINKS, NavLink } from '@/data/data'
 import Link from 'next/link'
-import React from 'react'
 
 const Navbar = () => {
     return (
