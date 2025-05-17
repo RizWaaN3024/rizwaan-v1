@@ -36,24 +36,3 @@ export const NAV_LINKS: NavLink[] = [
         link: "/blog"
     }
 ]
-
-export const SOCIAL_LINKS: SocialLink[] = [
-    {
-        id: 1,
-        label: "Instagram",
-        icon: FaInstagram,
-        link: "",
-    },
-    {
-        id: 2,
-        label: "Github",
-        icon: FaGithub,
-        link: "",
-    },
-    {
-        id: 3,
-        label: "LinkedIn",
-        icon: FaLinkedin,
-        link: "",
-    },
-]
