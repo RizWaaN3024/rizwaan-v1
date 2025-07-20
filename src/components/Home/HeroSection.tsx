@@ -18,10 +18,10 @@ const HeroSection = () => {
                             <h1 className="text-[12vw] font-medium leading-[0.9]">Developer</h1>
                             <div className='absolute right-0 top-[-10%]'>
                                 <CircularText
-                                    text="CODE*CREATE*INNOVATE*REPEAR*"
+                                    text="CODE*CREATE*INNOVATE*"
                                     onHover="speedUp"
                                     spinDuration={20}
-                                    className="!w-40 !h-40"
+                                    className="!w-40 !h-40 !z-50"
                                 />
                             </div>
                         </div>
