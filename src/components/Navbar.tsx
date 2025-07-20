@@ -97,7 +97,7 @@ const AnimatedNavbar = () => {
             <button 
                 ref={hamburgerRef}
                 onClick={toggleNav}
-                className="relative z-50 w-8 h-8 flex flex-col justify-between mix-blend-difference"
+                className="relative z-[999] w-8 h-8 flex flex-col justify-between mix-blend-difference"
                 aria-label="Toggle menu"
             >
                 <span className="w-full h-0.5 bg-white transform transition-transform origin-center"></span>
