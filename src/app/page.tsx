@@ -1,5 +1,6 @@
 import AboutSection from "@/components/Home/AboutSection";
 import HeroSection from "@/components/Home/HeroSection";
+import SkillsSection from "@/components/Home/SkillsSection";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
@@ -10,8 +11,11 @@ export default function Home() {
                 <HeroSection />
             </div>
             {/* <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800"></div> */}
-            <div className="relative z-20">
+            <div className="sticky top-0 z-20">
                 <AboutSection />
+            </div>
+            <div className="relative z-30">
+                <SkillsSection />
             </div>
         </main>
     );

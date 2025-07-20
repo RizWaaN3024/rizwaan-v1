@@ -9,11 +9,60 @@ const AboutSection = () => {
     const sectionRef = useRef(null);
     const contentRef = useRef(null);
     const imageRef = useRef(null);
+    const floatingRef1 = useRef(null);
+    const floatingRef2 = useRef(null);
+    const floatingRef3 = useRef(null);
+    const containerRef = useRef(null);
 
     useEffect(() => {
         const section = sectionRef.current;
         const content = contentRef.current;
         const image = imageRef.current;
+        const elements = [ floatingRef1.current, floatingRef2.current, floatingRef3.current ];
+    
+        elements.forEach((el, idx) => {
+            if (el) {
+                gsap.to(el, 
+                    {
+                        y: -20,
+                        duration: 2 + idx * 0.5,
+                        ease: "power2.inOut",
+                        repeat: -1,
+                        yoyo: true,
+                        delay: idx * 0.3
+                    }
+                )
+
+                gsap.to(el, 
+                    {
+                        rotation: 360,
+                        duration: 8 + idx * 2,
+                        ease: "none",
+                        repeat: -1
+                    }
+                )
+
+                el.addEventListener('mouseenter', () => {
+                    gsap.to(el, 
+                        {
+                            scale: 1.2,
+                            duration: 0.3,
+                            ease: "back.out(1.7)"
+                        }
+                    )
+                })
+
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(el,
+                        {
+                            scale: 1,
+                            duration: 0.3,
+                            ease: "back.out(1.7)"
+                        }
+                    )
+                })
+            }
+        })
 
         gsap.fromTo(section,
             {
@@ -86,7 +135,16 @@ const AboutSection = () => {
                 }
             }
         )
-    })
+
+        return () => {
+            elements.forEach((el) => {
+                if (el) {
+                    el.removeEventListener('mouseenter', () => {});
+                    el.removeEventListener('mouseleave', () => {});
+                }
+            })
+        }
+    }, [])
     return (
         <section
             ref={sectionRef}
@@ -128,16 +186,16 @@ const AboutSection = () => {
 
                 {/* Image/Visual */}
                 <div ref={imageRef} className="flex justify-center">
-                    <div className="relative">
+                    <div ref={containerRef} className="relative">
                         {/* Main circle */}
                         <div className="w-80 h-80 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center shadow-2xl">
                             <div className="text-white text-6xl font-bold drop-shadow-lg">RZ</div>
                         </div>
 
                         {/* Floating elements */}
-                        <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full opacity-80"></div>
-                        <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full opacity-70"></div>
-                        <div className="absolute top-1/2 -left-8 w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full opacity-60"></div>
+                        <div ref={floatingRef1} className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full opacity-80"></div>
+                        <div ref={floatingRef2} className="absolute -bottom-6 -left-6 w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full opacity-70"></div>
+                        <div ref={floatingRef3} className="absolute top-1/2 -left-8 w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full opacity-60"></div>
                     </div>
                 </div>
             </div>
