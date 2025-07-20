@@ -111,7 +111,7 @@ const AnimatedNavbar = () => {
       {/* Fullscreen Navigation Overlay */}
       <div 
         ref={overlayRef}
-        className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-purple-900 z-40 hidden items-center justify-center"
+        className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-purple-900 z-[100] hidden items-center justify-center"
         style={{ clipPath: 'circle(0% at 95% 5%)' }}
       >
         <div className="text-center">

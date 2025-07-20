@@ -3,6 +3,8 @@ import SplashCursor from '../SplashCursor'
 import { BsArrowDown } from 'react-icons/bs'
 import Link from 'next/link'
 import CircularText from '../CircularText'
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { FaX } from 'react-icons/fa6'
 
 const HeroSection = () => {
     return (
@@ -30,7 +32,7 @@ const HeroSection = () => {
                         <div className="h-[1px] w-[60px] bg-white mr-4"></div>
                         <p className="text-base md:text-lg text-white/70">Based in Bengaluru, India</p>
                     </div>
-                    <div className='mt-8'>
+                    <div className='mt-8 flex items-center gap-4'>
                         <Link
                             href={"/"}
                             className='group z-50 relative inline-flex items-center px-8 py-4 text-sm font-medium tracking-wider uppercase text-white/90 border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden hover:text-white rounded-[4px]'>
@@ -38,6 +40,17 @@ const HeroSection = () => {
                             <span className='relative z-10'>View My Resume</span>
                             <span className='relative z-10 ml-2 transform group-hover:translate-x-1 transition-transform duration-300'>→</span>
                         </Link>
+                        <div className='flex gap-4'>
+                            <Link href={"/"} className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
+                                <FaGithub size={42} />
+                            </Link>
+                            <Link href={"/"} className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
+                                <FaLinkedin size={42} />
+                            </Link>
+                            <Link href={"/"} className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
+                                <FaTwitter size={42} />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
