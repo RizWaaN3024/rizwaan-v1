@@ -1,10 +1,8 @@
-import React from 'react'
-import SplashCursor from '../SplashCursor'
-import { BsArrowDown } from 'react-icons/bs'
 import Link from 'next/link'
+import { BsArrowDown } from 'react-icons/bs'
+import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import CircularText from '../CircularText'
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
-import { FaX } from 'react-icons/fa6'
+import SplashCursor from '../SplashCursor'
 
 const HeroSection = () => {
     return (
@@ -49,6 +47,9 @@ const HeroSection = () => {
                             </Link>
                             <Link href={"/"} className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                 <FaTwitter size={42} />
+                            </Link>
+                            <Link href={"/"} className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
+                                <FaEnvelope size={42} />
                             </Link>
                         </div>
                     </div>
