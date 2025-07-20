@@ -29,7 +29,7 @@ const AboutSection = () => {
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 70%",
+                    start: "top 20%",
                     end: "top 10%",
                     scrub: 1
                 }
@@ -55,7 +55,7 @@ const AboutSection = () => {
 
         gsap.fromTo(image,
             {
-                scale: 0.8,
+                scale: 0.5,
                 opacity: 0,
                 rotation: -5
             },
@@ -73,11 +73,24 @@ const AboutSection = () => {
                 }
             }
         )
+
+        gsap.to(section, 
+            {
+                yPercent: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            }
+        )
     })
     return (
         <section
             ref={sectionRef}
-            className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center justify-center relative overflow-hidden"
+            className="min-h-screen bg-gradient-to-bl from-black via-gray-900 to-gray-800 flex items-center justify-center relative overflow-hidden"
             style={{
                 borderTopLeftRadius: '6rem',
                 borderTopRightRadius: '6rem',
@@ -85,30 +98,29 @@ const AboutSection = () => {
             }}
         >
             {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10"></div>
-
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-purple-500/8 to-gray-500/5"></div>
             <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-16 items-center relative z-10">
                 {/* Content */}
                 <div ref={contentRef} className="text-white">
                     <h2 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                         About Me
                     </h2>
-                    <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed">
-                        I'm a passionate developer who creates digital experiences that captivate and inspire.
+                    <p className="text-xl md:text-xl mb-8 text-gray-300 leading-relaxed">
+                        Hey, I&apos;m Rizwaan — a developer who loves building smooth, responsive websites and apps that people actually enjoy using.
                     </p>
                     <p className="text-lg text-gray-400 leading-relaxed mb-8">
-                        With expertise in modern web technologies, I help brands tell their story through
-                        beautiful, functional websites that drive real results.
+                        With over 3 years of hands-on experience, I&apos;ve worked on everything from real-time chat apps to mobile platforms for doctors and technicians. My toolbox includes React, Next.js, and React Native — and I’m always up for learning something new (or fighting with CSS, again).
+                        When the code runs bug-free on the first try? That’s my version of magic.
                     </p>
 
                     {/* Skills or stats */}
                     <div className="grid grid-cols-2 gap-6">
                         <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl">
-                            <h3 className="text-2xl font-bold text-white mb-2">50+</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">10+</h3>
                             <p className="text-gray-400">Projects Completed</p>
                         </div>
                         <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl">
-                            <h3 className="text-2xl font-bold text-white mb-2">3+</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">2+</h3>
                             <p className="text-gray-400">Years Experience</p>
                         </div>
                     </div>
@@ -119,7 +131,7 @@ const AboutSection = () => {
                     <div className="relative">
                         {/* Main circle */}
                         <div className="w-80 h-80 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center shadow-2xl">
-                            <div className="text-white text-6xl font-bold">RZ</div>
+                            <div className="text-white text-6xl font-bold drop-shadow-lg">RZ</div>
                         </div>
 
                         {/* Floating elements */}
