@@ -46,7 +46,9 @@ const HeroSection = () => {
         }, '-=0.2');
 
         tl.to({}, { duration: 0.3 });
-        return () => tl.kill();
+        return () => {
+            tl.kill();
+        } 
     }, []);
 
     useEffect(() => {
@@ -68,7 +70,9 @@ const HeroSection = () => {
                 },
                 '-=0.2'
             )
-            return () => tl.kill();
+            return () => {
+                tl.kill();
+            }
         }
     }, [showContent]);
     
@@ -84,7 +88,7 @@ const HeroSection = () => {
                                 <span 
                                     key={index}
                                     ref={el => lettersRef.current[index] = el}
-                                    className='text-4xl md:text-6xl font-bold text-white'
+                                    className='text-4xl md:text-6xl font-bold text-white opacity-0'
                                     >
                                         {letter}
                                 </span>
@@ -95,7 +99,7 @@ const HeroSection = () => {
                                 <span
                                 key={index}
                                 ref={el => dotsRef.current[index] = el}
-                                className="text-2xl text-white/60"
+                                className="text-2xl text-white/60 opacity-0"
                             >
                                 {dot}
                             </span>
