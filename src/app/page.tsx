@@ -1,5 +1,6 @@
 import AboutSection from "@/components/Home/AboutSection";
 import HeroSection from "@/components/Home/HeroSection";
+import ProjectsSection from "@/components/Home/ProjectsSection";
 import SkillsSection from "@/components/Home/SkillsSection";
 import Navbar from "@/components/Navbar";
 
@@ -14,8 +15,11 @@ export default function Home() {
             <div className="sticky top-0 z-20">
                 <AboutSection />
             </div>
-            <div className="relative z-30">
+            {/* <div className="relative z-30">
                 <SkillsSection />
+            </div> */}
+            <div className="relative z-40">
+                <ProjectsSection />
             </div>
         </main>
     );
