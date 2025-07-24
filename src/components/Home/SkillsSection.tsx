@@ -76,7 +76,7 @@ const SkillsSection = () => {
                 boxShadow: '0 -20px 40px rgba(0,0,0,0.1)'
             }}
         >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/5 to-cyan-500/3"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/5 to-cyan-500/3"></div>
             <div className='lg:container mx-auto px-4 relative z-10'>
                 <div className='text-center mb-16'>
                     <h2 className="text-5xl md:text-7xl leading-snug font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
