@@ -22,7 +22,7 @@ const experiences = [
             'Developed ScreenFixer platform using Next.js + PHP Symfony with custom APIs',
             'Integrated PhonePe payments for seamless transaction processing'
         ],
-        tech: ['React Native', 'Next.js', 'PHP Symfony', 'MySQL', 'WordPress'],
+        tech: ['React', 'React Native', 'Next.js', 'PHP Symfony', 'MySQL', 'WordPress'],
         current: true
     },
     {
@@ -68,18 +68,18 @@ const ExperienceSection = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Animate the main timeline line
+            // Animate the main timeline line with smooth scroll progress
             gsap.fromTo(timelineLineRef.current,
                 { scaleY: 0 },
                 {
                     scaleY: 1,
-                    duration: 2,
-                    ease: "power3.out",
+                    ease: "none",
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 60%",
-                        end: "bottom 20%",
-                        scrub: 1
+                        start: "top 70%",
+                        end: "bottom 30%",
+                        scrub: 1.5,
+                        invalidateOnRefresh: true
                     }
                 }
             );
@@ -95,60 +95,61 @@ const ExperienceSection = () => {
                 });
             });
 
-            // Animate timeline items
-            experiences.forEach((_, index) => {
-                const isLeft = index % 2 === 0;
-                
-                // Animate year number
-                gsap.fromTo(`[data-year="${index}"]`,
-                    { opacity: 0, x: isLeft ? -30 : 30 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: `[data-timeline-item="${index}"]`,
-                            start: "top 75%",
-                            toggleActions: "play none none reverse"
+                // Animate timeline items with improved triggers
+                experiences.forEach((_, index) => {
+                    const isLeft = index % 2 === 0;
+                    
+                    // Animate year number
+                    gsap.fromTo(`[data-year="${index}"]`,
+                        { opacity: 0, x: isLeft ? -50 : 50 },
+                        {
+                            opacity: 1,
+                            x: 0,
+                            duration: 1,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: `[data-timeline-item="${index}"]`,
+                                start: "top 80%",
+                                toggleActions: "play none none reverse"
+                            }
                         }
-                    }
-                );
+                    );
 
-                // Animate content card
-                gsap.fromTo(`[data-content="${index}"]`,
-                    { opacity: 0, x: isLeft ? 30 : -30, y: 20 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        y: 0,
-                        duration: 1,
-                        ease: "power3.out",
-                        delay: 0.2,
-                        scrollTrigger: {
-                            trigger: `[data-timeline-item="${index}"]`,
-                            start: "top 75%",
-                            toggleActions: "play none none reverse"
+                    // Animate content card
+                    gsap.fromTo(`[data-content="${index}"]`,
+                        { opacity: 0, x: isLeft ? 50 : -50, y: 30 },
+                        {
+                            opacity: 1,
+                            x: 0,
+                            y: 0,
+                            duration: 1.2,
+                            ease: "power3.out",
+                            delay: 0.3,
+                            scrollTrigger: {
+                                trigger: `[data-timeline-item="${index}"]`,
+                                start: "top 80%",
+                                toggleActions: "play none none reverse"
+                            }
                         }
-                    }
-                );
+                    );
 
-                // Animate timeline dot
-                gsap.fromTo(`[data-dot="${index}"]`,
-                    { scale: 0 },
-                    {
-                        scale: 1,
-                        duration: 0.6,
-                        ease: "back.out(1.7)",
-                        delay: 0.4,
-                        scrollTrigger: {
-                            trigger: `[data-timeline-item="${index}"]`,
-                            start: "top 75%",
-                            toggleActions: "play none none reverse"
+                    // Animate timeline dot with bounce effect
+                    gsap.fromTo(`[data-dot="${index}"]`,
+                        { scale: 0, rotation: 180 },
+                        {
+                            scale: 1,
+                            rotation: 0,
+                            duration: 0.8,
+                            ease: "back.out(1.7)",
+                            delay: 0.6,
+                            scrollTrigger: {
+                                trigger: `[data-timeline-item="${index}"]`,
+                                start: "top 80%",
+                                toggleActions: "play none none reverse"
+                            }
                         }
-                    }
-                );
-            });
+                    );
+                });
 
         }, sectionRef);
 
@@ -162,7 +163,7 @@ const ExperienceSection = () => {
         >
             <div className='lg:container mx-auto px-4'>
                 {/* Header */}
-                <div className='py-16 lg:py-25'>
+                <div className='py-20 lg:py-32'>
                     <div className='flex'>
                         <div className="hidden lg:block w-1/4 pr-8"></div>
                         <div className='w-full lg:w-3/4'>
@@ -183,11 +184,15 @@ const ExperienceSection = () => {
                 <div className='relative max-w-7xl mx-auto pb-32'>
                     {/* Central Timeline Line */}
                     <div className='absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 bg-white/10 hidden lg:block'>
+                        {/* Progress Line */}
                         <div
                             ref={timelineLineRef}
-                            className='w-full bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 origin-top'
+                            className='w-full bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 origin-top shadow-lg shadow-blue-400/20'
                             style={{ height: '100%' }}
                         />
+                        
+                        {/* Animated pulse at the end of progress line */}
+                        <div className='absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-pink-500 rounded-full animate-pulse shadow-lg shadow-pink-500/50' />
                     </div>
 
                     {/* Timeline Items */}
