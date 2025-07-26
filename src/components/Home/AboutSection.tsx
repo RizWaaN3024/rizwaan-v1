@@ -18,11 +18,11 @@ const AboutSection = () => {
         const section = sectionRef.current;
         const content = contentRef.current;
         const image = imageRef.current;
-        const elements = [ floatingRef1.current, floatingRef2.current, floatingRef3.current ];
-    
+        const elements = [floatingRef1.current, floatingRef2.current, floatingRef3.current];
+
         elements.forEach((el, idx) => {
             if (el) {
-                gsap.to(el, 
+                gsap.to(el,
                     {
                         y: -20,
                         duration: 2 + idx * 0.5,
@@ -33,7 +33,7 @@ const AboutSection = () => {
                     }
                 )
 
-                gsap.to(el, 
+                gsap.to(el,
                     {
                         rotation: 360,
                         duration: 8 + idx * 2,
@@ -43,7 +43,7 @@ const AboutSection = () => {
                 )
 
                 el.addEventListener('mouseenter', () => {
-                    gsap.to(el, 
+                    gsap.to(el,
                         {
                             scale: 1.2,
                             duration: 0.3,
@@ -123,7 +123,7 @@ const AboutSection = () => {
             }
         )
 
-        gsap.to(section, 
+        gsap.to(section,
             {
                 yPercent: 0,
                 ease: "none",
@@ -139,8 +139,8 @@ const AboutSection = () => {
         return () => {
             elements.forEach((el) => {
                 if (el) {
-                    el.removeEventListener('mouseenter', () => {});
-                    el.removeEventListener('mouseleave', () => {});
+                    el.removeEventListener('mouseenter', () => { });
+                    el.removeEventListener('mouseleave', () => { });
                 }
             })
         }
