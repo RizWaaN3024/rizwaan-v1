@@ -223,7 +223,7 @@ const OpenSourceSection = () => {
                 <div className='flex'>
                     {/* <div className="hidden lg:block w-1/4 pr-8"></div> */}
                     <div className='w-full pb-32'>
-                        
+
                         {/* Active Programs */}
                         <div className='mb-20'>
                             <h3 className="text-2xl lg:text-3xl font-medium mb-8 text-white/90">
@@ -235,15 +235,15 @@ const OpenSourceSection = () => {
                                         key={program.id}
                                         data-program={index}
                                         className={`relative p-6 bg-gradient-to-br from-white/5 to-white/10 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:scale-105
-                                            ${program.current 
-                                                ? 'border-blue-400/30 ring-1 ring-blue-400/20 shadow-lg shadow-blue-400/10' 
+                                            ${program.current
+                                                ? 'border-blue-400/30 ring-1 ring-blue-400/20 shadow-lg shadow-blue-400/10'
                                                 : 'border-white/10 hover:border-white/20'
                                             }`}
                                     >
                                         {program.current && (
                                             <div className='absolute -top-2 -right-2 w-4 h-4 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50' />
                                         )}
-                                        
+
                                         <div className='flex items-start gap-4 mb-4'>
                                             <div className='text-3xl'>{program.logo}</div>
                                             <div className='flex-1'>
