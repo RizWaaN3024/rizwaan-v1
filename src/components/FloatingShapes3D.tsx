@@ -32,7 +32,7 @@ const FloatingShapes3D = () => {
         renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
-        
+
         // Enable shadows for more realistic rendering
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -56,13 +56,13 @@ const FloatingShapes3D = () => {
         const pointLight = new THREE.PointLight(0x8b5cf6, 1, 10)
         pointLight.position.set(-3, 2, 3);
         scene.add(pointLight);
-        
+
         // Main sphere with realistic material - CENTER stage
         const sphereGeometry = new THREE.SphereGeometry(1.5, 32, 32);
         const sphereMaterial = new THREE.MeshStandardMaterial({
             color: 0x8b5cf6,
-            metalness: 0.7,    
-            roughness: 0.2,    
+            metalness: 0.7,
+            roughness: 0.2,
             emissive: 0x221133,
         });
         const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
@@ -104,7 +104,7 @@ const FloatingShapes3D = () => {
             // Main sphere - gentle rotation
             sphere.rotation.x += 0.005;
             sphere.rotation.y += 0.01;
-            
+
             // Floating movement - MORE dramatic
             sphere.position.y = Math.sin(Date.now() * 0.001) * 0.5;
 
@@ -166,7 +166,7 @@ const FloatingShapes3D = () => {
         <div
             ref={mountRef}
             className="w-full aspect-square"
-            style={{ 
+            style={{
                 minHeight: '400px',
                 position: 'relative',
                 zIndex: 1
