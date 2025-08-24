@@ -19,12 +19,12 @@ export const NAV_LINKS: NavLink[] = [
         id: 1,
         label: "Home",
         link: "/home"
-    }, 
+    },
     {
         id: 2,
         label: "About",
         link: "/about"
-    }, 
+    },
     {
         id: 3,
         label: "Blogs",
