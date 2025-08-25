@@ -19,10 +19,10 @@ export const useLenis = () => {
             wheelMultiplier: 1,
             autoResize: true,
             prevent: (node) => {
-                return node.tagName === 'INPUT' || 
-                       node.tagName === 'TEXTAREA' || 
-                       node.tagName === 'SELECT' ||
-                       node.classList.contains('no-lenis');
+                return node.tagName === 'INPUT' ||
+                    node.tagName === 'TEXTAREA' ||
+                    node.tagName === 'SELECT' ||
+                    node.classList.contains('no-lenis');
             }
         })
 
@@ -41,7 +41,7 @@ export const useLenis = () => {
         const handleResize = () => {
             lenis.resize();
         };
-        
+
         window.addEventListener('resize', handleResize);
 
         return () => {
