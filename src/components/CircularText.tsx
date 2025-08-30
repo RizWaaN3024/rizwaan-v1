@@ -32,6 +32,7 @@ const CircularText = ({
 
     useEffect(() => {
         const start = rotation.get();
+        //@ts-expect-error
         controls.start({
             rotate: start + 360,
             scale: 1,
