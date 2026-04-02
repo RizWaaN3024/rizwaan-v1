@@ -71,7 +71,7 @@ const ProjectsSection = () => {
                 })
             });
 
-            gsap.utils.toArray('[data-project]').forEach((project, index) => {
+            gsap.utils.toArray<Element>('[data-project]').forEach((project, index) => {
                 gsap.fromTo(project,
                     { opacity: 0.4, y: 50 },
                     {

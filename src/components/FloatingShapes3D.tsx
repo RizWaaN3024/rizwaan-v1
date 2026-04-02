@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 const FloatingShapes3D = () => {
-    const mountRef = useRef(null);
-    const sceneRef = useRef(null);
-    const rendererRef = useRef(null);
-    const frameRef = useRef(null);
+    const mountRef = useRef<HTMLDivElement>(null);
+    const sceneRef = useRef<THREE.Scene | null>(null);
+    const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+    const frameRef = useRef<number | null>(null);
 
     useEffect(() => {
         const container = mountRef.current;

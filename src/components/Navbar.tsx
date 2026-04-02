@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 const NAV_LINKS = [
@@ -11,10 +11,10 @@ const NAV_LINKS = [
 
 const AnimatedNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const overlayRef = useRef(null);
-    const navItemsRef = useRef([]);
-    const hamburgerRef = useRef(null);
-    const timelineRef = useRef(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
+    const navItemsRef = useRef<(HTMLElement | null)[]>([]);
+    const hamburgerRef = useRef<HTMLButtonElement>(null);
+    const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
     useEffect(() => {
         timelineRef.current = gsap.timeline({ paused: true });
@@ -46,6 +46,7 @@ const AnimatedNavbar = () => {
     }, []);
 
     const toggleNav = () => {
+        if (!hamburgerRef.current) return;
         const newState = !isOpen;
         setIsOpen(newState);
         gsap.to(hamburgerRef.current.children, {
@@ -74,9 +75,9 @@ const AnimatedNavbar = () => {
             ease: 'power2.out'
         });
         if (newState) {
-            timelineRef.current.play();
+            timelineRef.current?.play();
         } else {
-            timelineRef.current.reverse();
+            timelineRef.current?.reverse();
         }
     };
 
@@ -120,7 +121,7 @@ const AnimatedNavbar = () => {
                         {NAV_LINKS.map((item, index) => (
                             <li
                                 key={index}
-                                ref={el => navItemsRef.current[index] = el}
+                                ref={el => { navItemsRef.current[index] = el; }}
                                 className="overflow-hidden px-6"
                             >
                                 <a
@@ -140,7 +141,7 @@ const AnimatedNavbar = () => {
                             <a
                                 key={social}
                                 href="#"
-                                ref={el => navItemsRef.current[NAV_LINKS.length + index] = el}
+                                ref={el => { navItemsRef.current[NAV_LINKS.length + index] = el; }}
                                 className="text-white/60 hover:text-white text-lg transition-colors duration-300"
                             >
                                 {social}

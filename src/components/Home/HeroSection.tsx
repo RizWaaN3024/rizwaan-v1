@@ -9,18 +9,18 @@ import gsap from 'gsap';
 
 const HeroSection = () => {
     const [showContent, setShowContent] = useState(false);
-    const loaderRef = useRef(null);
-    const lettersRef = useRef([]);
-    const dotsRef = useRef([]);
-    const heroRef = useRef(null);
-    const greetingRef = useRef(null);
-    const titleLinesRef = useRef([]);
-    const locationLineRef = useRef(null);
-    const locationTextRef = useRef(null);
-    const ctaButtonRef = useRef(null);
-    const socialIconsRef = useRef([]);
-    const scrollIndicatorRef = useRef(null);
-    const circularTextRef = useRef(null);
+    const loaderRef = useRef<HTMLDivElement>(null);
+    const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
+    const dotsRef = useRef<(HTMLSpanElement | null)[]>([]);
+    const heroRef = useRef<HTMLElement>(null);
+    const greetingRef = useRef<HTMLParagraphElement>(null);
+    const titleLinesRef = useRef<(HTMLHeadingElement | null)[]>([]);
+    const locationLineRef = useRef<HTMLDivElement>(null);
+    const locationTextRef = useRef<HTMLParagraphElement>(null);
+    const ctaButtonRef = useRef<HTMLAnchorElement>(null);
+    const socialIconsRef = useRef<(HTMLAnchorElement | null)[]>([]);
+    const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+    const circularTextRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const tl = gsap.timeline({
@@ -186,7 +186,7 @@ const HeroSection = () => {
                             {['R', 'i', 'z', 'w', 'a', 'a', 'n'].map((letter, index) => (
                                 <span 
                                     key={index}
-                                    ref={el => lettersRef.current[index] = el}
+                                    ref={el => { lettersRef.current[index] = el; }}
                                     className='text-4xl md:text-6xl font-bold text-white opacity-0'
                                     >
                                         {letter}
@@ -197,7 +197,7 @@ const HeroSection = () => {
                             {['.', '.', '.'].map((dot, index) => (
                                 <span
                                 key={index}
-                                ref={el => dotsRef.current[index] = el}
+                                ref={el => { dotsRef.current[index] = el; }}
                                 className="text-2xl text-white/60 opacity-0"
                             >
                                 {dot}
@@ -219,10 +219,10 @@ const HeroSection = () => {
                             </p>
                             <div className="mb-10">
                                 <h1
-                                    ref={el => titleLinesRef.current[0] = el}
+                                    ref={el => { titleLinesRef.current[0] = el; }}
                                     className="text-[12vw] tracking-tighter font-medium leading-[0.9]">Full Stack</h1>
                                 <h1
-                                    ref={el => titleLinesRef.current[1] = el}
+                                    ref={el => { titleLinesRef.current[1] = el; }}
                                      className="text-[12vw] font-medium leading-[0.9]">Developer</h1>
                                 <div
                                     ref={circularTextRef} 
@@ -255,25 +255,25 @@ const HeroSection = () => {
                             </Link>
                             <div className='flex gap-4'>
                                 <Link
-                                    ref={el => socialIconsRef.current[0] = el}
+                                    ref={el => { socialIconsRef.current[0] = el; }}
                                     href={"/"} 
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaGithub size={42} />
                                 </Link>
                                 <Link
-                                    ref={el => socialIconsRef.current[1] = el} 
+                                    ref={el => { socialIconsRef.current[1] = el; }} 
                                     href={"/"} 
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaLinkedin size={42} />
                                 </Link>
                                 <Link
-                                    ref={el => socialIconsRef.current[2] = el} 
+                                    ref={el => { socialIconsRef.current[2] = el; }} 
                                     href={"/"} 
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaTwitter size={42} />
                                 </Link>
                                 <Link
-                                    ref={el => socialIconsRef.current[3] = el} 
+                                    ref={el => { socialIconsRef.current[3] = el; }} 
                                     href={"/"} 
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaEnvelope size={42} />

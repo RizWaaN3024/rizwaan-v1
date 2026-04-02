@@ -26,11 +26,11 @@ export const useLenis = () => {
             }
         })
 
-        lenis.on('scroll', (e) => {
+        lenis.on('scroll', () => {
             ScrollTrigger.update();
         });
 
-        const ticker = (time) => {
+        const ticker = (time: number) => {
             lenis.raf(time * 1000);
         };
 

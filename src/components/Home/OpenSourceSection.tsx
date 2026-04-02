@@ -125,7 +125,7 @@ const OpenSourceSection = () => {
             );
 
             // Animate program cards
-            gsap.utils.toArray('[data-program]').forEach((card, index) => {
+            gsap.utils.toArray<Element>('[data-program]').forEach((card, index) => {
                 gsap.fromTo(card,
                     { opacity: 0, y: 50, scale: 0.9 },
                     {
@@ -145,7 +145,7 @@ const OpenSourceSection = () => {
             });
 
             // Animate contribution cards
-            gsap.utils.toArray('[data-contribution]').forEach((card, index) => {
+            gsap.utils.toArray<Element>('[data-contribution]').forEach((card, index) => {
                 gsap.fromTo(card,
                     { opacity: 0, x: index % 2 === 0 ? -30 : 30 },
                     {
@@ -164,7 +164,7 @@ const OpenSourceSection = () => {
             });
 
             // Animate stats
-            gsap.utils.toArray('[data-stat]').forEach((stat, index) => {
+            gsap.utils.toArray<Element>('[data-stat]').forEach((stat, index) => {
                 gsap.fromTo(stat,
                     { opacity: 0, y: 20 },
                     {
@@ -187,7 +187,7 @@ const OpenSourceSection = () => {
         return () => ctx.revert();
     }, []);
 
-    const getStatusColor = (status) => {
+    const getStatusColor = (status: string) => {
         switch (status) {
             case 'Merged': return 'text-green-400 bg-green-400/10 border-green-400/30';
             case 'Review': return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30';
