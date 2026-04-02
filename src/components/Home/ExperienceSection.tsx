@@ -1,65 +1,11 @@
 "use client";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MapPin, Calendar, Briefcase, ExternalLink } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import { MapPin, Calendar } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { EXPERIENCES } from '@/data/experience';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const experiences = [
-    {
-        id: '01',
-        year: '2024',
-        company: 'Oro Media Lab',
-        role: 'Full-Stack Developer',
-        location: 'Bangalore',
-        duration: 'Feb 2024 – Present',
-        type: 'Full-time',
-        description: 'Leading full-stack development initiatives across multiple high-impact projects, from WordPress optimization to mobile app development.',
-        achievements: [
-            'Revamped MoEngage WordPress website, boosting Google PageSpeed from 60 to 96+',
-            'Built RepairSeva mobile app (React Native + PHP) for technician workflow management',
-            'Developed ScreenFixer platform using Next.js + PHP Symfony with custom APIs',
-            'Integrated PhonePe payments for seamless transaction processing'
-        ],
-        tech: ['React', 'React Native', 'Next.js', 'PHP Symfony', 'MySQL', 'WordPress'],
-        current: true
-    },
-    {
-        id: '02',
-        year: '2024',
-        company: 'QuickFly.ae',
-        role: 'Freelance Developer',
-        location: 'Dubai (Remote)',
-        duration: 'Oct 2024 – Nov 2024',
-        type: 'Contract',
-        description: 'Delivered a complete frontend solution for a Dubai-based cargo shipment company with modern tech stack.',
-        achievements: [
-            'Developed frontend using Next.js, TypeScript, and Tailwind CSS',
-            'Integrated EmailJS for automated client registration notifications',
-            'Delivered fully responsive and SEO-optimized web experience'
-        ],
-        tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'EmailJS'],
-        current: false
-    },
-    {
-        id: '03',
-        year: '2023',
-        company: 'Indegene',
-        role: 'Web Developer',
-        location: 'Bangalore',
-        duration: 'Sep 2023 – Feb 2024',
-        type: 'Full-time',
-        description: 'Specialized in creating responsive marketing solutions for top-tier healthcare clients with focus on cross-platform compatibility.',
-        achievements: [
-            'Built responsive marketing emailers and web pages for healthcare clients',
-            'Ensured cross-platform compatibility across major browsers and email clients',
-            'Delivered pixel-perfect designs with optimal performance'
-        ],
-        tech: ['HTML', 'CSS', 'JavaScript', 'Email Development'],
-        current: false
-    }
-];
 
 const ExperienceSection = () => {
     const [activeExperience, setActiveExperience] = useState(0);
@@ -85,7 +31,7 @@ const ExperienceSection = () => {
             );
 
             // Set up scroll triggers for active state
-            experiences.forEach((_, index) => {
+            EXPERIENCES.forEach((_, index) => {
                 ScrollTrigger.create({
                     trigger: `[data-timeline-item="${index}"]`,
                     start: "top 60%",
@@ -96,7 +42,7 @@ const ExperienceSection = () => {
             });
 
                 // Animate timeline items with improved triggers
-                experiences.forEach((_, index) => {
+                EXPERIENCES.forEach((_, index) => {
                     const isLeft = index % 2 === 0;
                     
                     // Animate year number
@@ -197,7 +143,7 @@ const ExperienceSection = () => {
 
                     {/* Timeline Items */}
                     <div className='space-y-24 lg:space-y-32'>
-                        {experiences.map((experience, index) => {
+                        {EXPERIENCES.map((experience, index) => {
                             const isLeft = index % 2 === 0;
                             
                             return (

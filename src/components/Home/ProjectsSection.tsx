@@ -2,53 +2,11 @@
 import gsap from 'gsap';
 import { ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PROJECTS } from '@/data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
-    {
-        id: '01',
-        title: 'E-commerce Platform',
-        description: 'A full-stack e-commerce solution built with modern technologies. Features include user authentication, product management, shopping cart, payment integration, and admin dashboard.',
-        tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com/example',
-        image: '/api/placeholder/800/600',
-        year: '2024'
-    },
-    {
-        id: '02',
-        title: 'Task Management App',
-        description: 'A collaborative project management tool with real-time updates, drag-and-drop functionality, team collaboration features, and progress tracking.',
-        tech: ['Next.js', 'TypeScript', 'Socket.io', 'PostgreSQL'],
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com/example',
-        image: '/api/placeholder/800/600',
-        year: '2024'
-    },
-    {
-        id: '03',
-        title: 'Social Media Dashboard',
-        description: 'Analytics dashboard for social media management with data visualization, scheduling capabilities, and performance tracking.',
-        tech: ['React', 'Express', 'Chart.js', 'MySQL'],
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com/example',
-        image: '/api/placeholder/800/600',
-        year: '2023'
-    },
-    {
-        id: '04',
-        title: 'Weather Forecast App',
-        description: 'A sleek weather application with location-based forecasts, interactive maps, severe weather alerts, and detailed meteorological data.',
-        tech: ['React Native', 'Redux', 'Weather API', 'Maps SDK'],
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com/example',
-        image: '/api/placeholder/800/600',
-        year: '2023'
-    }
-];
 
 const ProjectsSection = () => {
     const [activeProject, setActiveProject] = useState(0);
@@ -57,7 +15,7 @@ const ProjectsSection = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            projects.forEach((_, index) => {
+            PROJECTS.forEach((_, index) => {
                 ScrollTrigger.create({
                     trigger: `[data-project="${index}"]`,
                     start: "top 30%",
@@ -139,7 +97,7 @@ const ProjectsSection = () => {
                                             transform: `translateY(-${activeProject * 1.2}em)`
                                         }}
                                     >
-                                        {projects.map((_, index) => (
+                                        {PROJECTS.map((_, index) => (
                                             <div
                                                 key={index}
                                                 className='flex items-center justify-center'
@@ -162,7 +120,7 @@ const ProjectsSection = () => {
                     {/* Project Container */}
 
                     <div className='w-full lg:w-3/4 space-y-32 lg:space-y-40 pb-32'>
-                        {projects.map((project, index) => (
+                        {PROJECTS.map((project, index) => (
                             <div
                                 key={project.id}
                                 data-project={index}

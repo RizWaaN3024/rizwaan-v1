@@ -1,0 +1,44 @@
+import type { Project } from '@/types';
+
+export const PROJECTS: Project[] = [
+  {
+    id: '01',
+    title: 'E-commerce Platform',
+    description: 'A full-stack e-commerce solution built with modern technologies. Features include user authentication, product management, shopping cart, payment integration, and admin dashboard.',
+    tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    liveUrl: 'https://example.com',
+    githubUrl: 'https://github.com/example',
+    image: '/api/placeholder/800/600',
+    year: '2024',
+  },
+  {
+    id: '02',
+    title: 'Task Management App',
+    description: 'A collaborative project management tool with real-time updates, drag-and-drop functionality, team collaboration features, and progress tracking.',
+    tech: ['Next.js', 'TypeScript', 'Socket.io', 'PostgreSQL'],
+    liveUrl: 'https://example.com',
+    githubUrl: 'https://github.com/example',
+    image: '/api/placeholder/800/600',
+    year: '2024',
+  },
+  {
+    id: '03',
+    title: 'Social Media Dashboard',
+    description: 'Analytics dashboard for social media management with data visualization, scheduling capabilities, and performance tracking.',
+    tech: ['React', 'Express', 'Chart.js', 'MySQL'],
+    liveUrl: 'https://example.com',
+    githubUrl: 'https://github.com/example',
+    image: '/api/placeholder/800/600',
+    year: '2023',
+  },
+  {
+    id: '04',
+    title: 'Weather Forecast App',
+    description: 'A sleek weather application with location-based forecasts, interactive maps, severe weather alerts, and detailed meteorological data.',
+    tech: ['React Native', 'Redux', 'Weather API', 'Maps SDK'],
+    liveUrl: 'https://example.com',
+    githubUrl: 'https://github.com/example',
+    image: '/api/placeholder/800/600',
+    year: '2023',
+  },
+];

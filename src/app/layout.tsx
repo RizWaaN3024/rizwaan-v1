@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Rizwaan Portfolio",
-	description: "My personal portfolio",
+	title: SITE_CONFIG.metadata.title,
+	description: SITE_CONFIG.metadata.description,
 };
 
 export default function RootLayout({

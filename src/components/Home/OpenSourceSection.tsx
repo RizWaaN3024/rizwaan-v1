@@ -1,106 +1,11 @@
 "use client";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Github, GitPullRequest, GitMerge, Star, GitFork, Calendar, Award, ExternalLink } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import { Github, GitPullRequest } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { PROGRAMS, CONTRIBUTIONS, GITHUB_STATS } from '@/data/open-source';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const programs = [
-    {
-        id: '01',
-        name: 'GSSoC 2025',
-        fullName: 'Girl Script Summer of Code',
-        status: 'Active Contributor',
-        duration: 'Jan 2025 - Present',
-        description: 'Contributing to OWASP/Nest project as part of the prestigious open source program.',
-        project: 'OWASP/Nest',
-        projectDescription: 'A progressive Node.js framework for building efficient and scalable server-side applications.',
-        contributions: '12+ merged PRs',
-        tech: ['Node.js', 'TypeScript', 'Testing', 'Security'],
-        current: true,
-        logo: '🌸'
-    },
-    {
-        id: '02',
-        name: 'Hacktoberfest 2024',
-        fullName: 'Hacktoberfest',
-        status: 'Upcoming Participant',
-        duration: 'Oct 2024',
-        description: 'Planning to contribute to multiple open source projects during the annual celebration.',
-        project: 'Various Projects',
-        projectDescription: 'Contributing to diverse projects across different technologies and domains.',
-        contributions: 'Planned',
-        tech: ['JavaScript', 'React', 'Node.js', 'Open Source'],
-        current: false,
-        logo: '🎃'
-    }
-];
-
-const contributions = [
-    {
-        id: 1,
-        title: 'Enhanced Authentication System',
-        repo: 'OWASP/Nest',
-        type: 'Feature',
-        status: 'Merged',
-        prNumber: '#245',
-        description: 'Implemented JWT-based authentication with enhanced security features',
-        additions: '+156',
-        deletions: '-23',
-        files: 8
-    },
-    {
-        id: 2,
-        title: 'Security Middleware Implementation',
-        repo: 'OWASP/Nest',
-        type: 'Security',
-        status: 'Merged',
-        prNumber: '#238',
-        description: 'Added comprehensive security middleware for request validation',
-        additions: '+89',
-        deletions: '-12',
-        files: 5
-    },
-    {
-        id: 3,
-        title: 'Unit Tests Coverage Improvement',
-        repo: 'OWASP/Nest',
-        type: 'Testing',
-        status: 'Merged',
-        prNumber: '#231',
-        description: 'Increased test coverage from 65% to 85% for core modules',
-        additions: '+234',
-        deletions: '-18',
-        files: 12
-    },
-    {
-        id: 4,
-        title: 'Documentation Enhancement',
-        repo: 'OWASP/Nest',
-        type: 'Docs',
-        status: 'Review',
-        prNumber: '#252',
-        description: 'Updated API documentation with comprehensive examples',
-        additions: '+67',
-        deletions: '-8',
-        files: 4
-    }
-];
-
-const githubStats = {
-    currentStreak: 45,
-    totalContributions: 267,
-    publicRepos: 12,
-    totalStars: 34,
-    languagesContributed: ['JavaScript', 'TypeScript', 'Python', 'PHP'],
-    thisYear: {
-        commits: 156,
-        prs: 23,
-        issues: 8,
-        reviews: 12
-    }
-};
 
 const OpenSourceSection = () => {
     const [activeTab, setActiveTab] = useState('programs');
@@ -230,7 +135,7 @@ const OpenSourceSection = () => {
                                 Active Programs
                             </h3>
                             <div className='grid md:grid-cols-2 gap-6'>
-                                {programs.map((program, index) => (
+                                {PROGRAMS.map((program, index) => (
                                     <div
                                         key={program.id}
                                         data-program={index}
@@ -290,7 +195,7 @@ const OpenSourceSection = () => {
                                 Recent Contributions
                             </h3>
                             <div className='space-y-4'>
-                                {contributions.map((contribution, index) => (
+                                {CONTRIBUTIONS.map((contribution, index) => (
                                     <div
                                         key={contribution.id}
                                         data-contribution={index}
@@ -330,19 +235,19 @@ const OpenSourceSection = () => {
                             </h3>
                             <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
                                 <div data-stat="0" className='p-4 bg-gradient-to-br from-white/5 to-white/10 rounded-xl border border-white/10'>
-                                    <div className='text-2xl font-bold text-white'>{githubStats.currentStreak}</div>
+                                    <div className='text-2xl font-bold text-white'>{GITHUB_STATS.currentStreak}</div>
                                     <div className='text-sm text-white/60'>Day Streak</div>
                                 </div>
                                 <div data-stat="1" className='p-4 bg-gradient-to-br from-white/5 to-white/10 rounded-xl border border-white/10'>
-                                    <div className='text-2xl font-bold text-white'>{githubStats.totalContributions}</div>
+                                    <div className='text-2xl font-bold text-white'>{GITHUB_STATS.totalContributions}</div>
                                     <div className='text-sm text-white/60'>Contributions</div>
                                 </div>
                                 <div data-stat="2" className='p-4 bg-gradient-to-br from-white/5 to-white/10 rounded-xl border border-white/10'>
-                                    <div className='text-2xl font-bold text-white'>{githubStats.thisYear.prs}</div>
+                                    <div className='text-2xl font-bold text-white'>{GITHUB_STATS.thisYear.prs}</div>
                                     <div className='text-sm text-white/60'>PRs Merged</div>
                                 </div>
                                 <div data-stat="3" className='p-4 bg-gradient-to-br from-white/5 to-white/10 rounded-xl border border-white/10'>
-                                    <div className='text-2xl font-bold text-white'>{githubStats.publicRepos}</div>
+                                    <div className='text-2xl font-bold text-white'>{GITHUB_STATS.publicRepos}</div>
                                     <div className='text-sm text-white/60'>Public Repos</div>
                                 </div>
                             </div>
@@ -350,7 +255,7 @@ const OpenSourceSection = () => {
                             <div className='p-6 bg-gradient-to-r from-white/5 to-white/10 rounded-xl border border-white/10'>
                                 <h4 className='font-medium text-white mb-4'>Languages Contributed To</h4>
                                 <div className='flex flex-wrap gap-3'>
-                                    {githubStats.languagesContributed.map((lang, index) => (
+                                    {GITHUB_STATS.languagesContributed.map((lang, index) => (
                                         <span
                                             key={index}
                                             className="px-3 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white/90 text-sm rounded-lg border border-blue-400/30"

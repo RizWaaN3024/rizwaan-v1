@@ -1,13 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-
-const NAV_LINKS = [
-    { label: 'Home', link: '/' },
-    { label: 'About', link: '/about' },
-    { label: 'Projects', link: '/projects' },
-    { label: 'Contact', link: '/contact' },
-];
+import { NAV_LINKS } from '@/data/navigation';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 const AnimatedNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +86,7 @@ const AnimatedNavbar = () => {
                         {/* Logo */}
                         <div className="relative z-50">
                             <h1 className="font-bold text-2xl text-white mix-blend-difference">
-                                Rizwaan
+                                {SITE_CONFIG.firstName}
                             </h1>
                         </div>
 
@@ -137,14 +132,20 @@ const AnimatedNavbar = () => {
 
                     {/* Social Links */}
                     <div className="mt-16 space-x-8">
-                        {['Twitter', 'LinkedIn', 'GitHub'].map((social, index) => (
+                        {[
+                            { label: 'Twitter', url: SITE_CONFIG.social.twitter },
+                            { label: 'LinkedIn', url: SITE_CONFIG.social.linkedin },
+                            { label: 'GitHub', url: SITE_CONFIG.social.github },
+                        ].map((social, index) => (
                             <a
-                                key={social}
-                                href="#"
+                                key={social.label}
+                                href={social.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 ref={el => { navItemsRef.current[NAV_LINKS.length + index] = el; }}
                                 className="text-white/60 hover:text-white text-lg transition-colors duration-300"
                             >
-                                {social}
+                                {social.label}
                             </a>
                         ))}
                     </div>

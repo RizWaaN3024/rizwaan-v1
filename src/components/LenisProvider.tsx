@@ -1,6 +1,6 @@
 "use client";
 
-import { useLenis } from "@/app/hooks/useLenis";
+import { useLenis } from '@/hooks/useLenis';
 
 
 export default function LenisProvider({ children }: Readonly<{ children: React.ReactNode }>) {

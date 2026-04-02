@@ -6,6 +6,7 @@ import CircularText from '../CircularText';
 import SplashCursor from '../SplashCursor';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 const HeroSection = () => {
     const [showContent, setShowContent] = useState(false);
@@ -183,7 +184,7 @@ const HeroSection = () => {
                  className='fixed inset-0 z-[9999] bg-black flex items-center justify-center'>
                     <div className='text-center'>
                         <div className='flex items-center justify-center space-x-1 mb-4'>
-                            {['R', 'i', 'z', 'w', 'a', 'a', 'n'].map((letter, index) => (
+                            {SITE_CONFIG.firstName.split('').map((letter, index) => (
                                 <span 
                                     key={index}
                                     ref={el => { lettersRef.current[index] = el; }}
@@ -215,7 +216,7 @@ const HeroSection = () => {
                             <p
                                 ref={greetingRef}
                                 className='text-lg md:text-xl mb-6 font-light tracking-wide mx-2'>
-                                Hi, I&apos;m Rizwaan
+                                Hi, I&apos;m {SITE_CONFIG.firstName}
                             </p>
                             <div className="mb-10">
                                 <h1
@@ -242,12 +243,12 @@ const HeroSection = () => {
                                 className="h-[1px] w-[60px] bg-white mr-4"></div>
                             <p
                                 ref={locationTextRef}
-                                className="text-base md:text-lg text-white/70">Based in Bengaluru, India</p>
+                                className="text-base md:text-lg text-white/70">Based in {SITE_CONFIG.location}</p>
                         </div>
                         <div className='mt-8 flex items-center gap-4'>
                             <Link
                                 ref={ctaButtonRef}
-                                href={"/"}
+                                href={SITE_CONFIG.resumeUrl}
                                 className='group z-50 relative inline-flex items-center px-8 py-4 text-sm font-medium tracking-wider uppercase text-white/90 border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden hover:text-white rounded-[4px]'>
                                 <span className='absolute inset-0 bg-gradient-to-r from-white/5 to-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out'></span>
                                 <span className='relative z-10'>View My Resume</span>
@@ -256,25 +257,28 @@ const HeroSection = () => {
                             <div className='flex gap-4'>
                                 <Link
                                     ref={el => { socialIconsRef.current[0] = el; }}
-                                    href={"/"} 
+                                    href={SITE_CONFIG.social.github}
+                                    target="_blank"
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaGithub size={42} />
                                 </Link>
                                 <Link
-                                    ref={el => { socialIconsRef.current[1] = el; }} 
-                                    href={"/"} 
+                                    ref={el => { socialIconsRef.current[1] = el; }}
+                                    href={SITE_CONFIG.social.linkedin}
+                                    target="_blank"
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaLinkedin size={42} />
                                 </Link>
                                 <Link
-                                    ref={el => { socialIconsRef.current[2] = el; }} 
-                                    href={"/"} 
+                                    ref={el => { socialIconsRef.current[2] = el; }}
+                                    href={SITE_CONFIG.social.twitter}
+                                    target="_blank"
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaTwitter size={42} />
                                 </Link>
                                 <Link
-                                    ref={el => { socialIconsRef.current[3] = el; }} 
-                                    href={"/"} 
+                                    ref={el => { socialIconsRef.current[3] = el; }}
+                                    href={`mailto:${SITE_CONFIG.email}`}
                                     className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
                                     <FaEnvelope size={42} />
                                 </Link>
