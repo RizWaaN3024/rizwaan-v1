@@ -22,6 +22,7 @@ const HeroSection = () => {
     const socialIconsRef = useRef<(HTMLAnchorElement | null)[]>([]);
     const scrollIndicatorRef = useRef<HTMLDivElement>(null);
     const circularTextRef = useRef<HTMLDivElement>(null);
+    const taglineRef = useRef<HTMLParagraphElement>(null);
 
     useEffect(() => {
         const tl = gsap.timeline({
@@ -83,6 +84,7 @@ const HeroSection = () => {
             tl.set([
                 greetingRef.current,
                 titleLinesRef.current,
+                taglineRef.current,
                 ctaButtonRef.current,
                 socialIconsRef.current,
                 scrollIndicatorRef.current,
@@ -118,6 +120,13 @@ const HeroSection = () => {
                 stagger: 0.15,
                 ease: 'power3.out',
             }, '-=0.6');
+
+            tl.to(taglineRef.current, {
+                opacity: 1,
+                transform: 'translateY(0px)',
+                duration: 0.8,
+                ease: 'power3.out',
+            }, '-=0.5');
 
             tl.to(locationLineRef.current, {
                 opacity: 1,
@@ -215,10 +224,10 @@ const HeroSection = () => {
                         <div>
                             <p
                                 ref={greetingRef}
-                                className='text-lg md:text-xl mb-6 font-light tracking-wide mx-2'>
+                                className='text-lg md:text-xl mb-6 font-light tracking-wide mx-2 text-brand'>
                                 Hi, I&apos;m {SITE_CONFIG.firstName}
                             </p>
-                            <div className="mb-10">
+                            <div className="mb-6">
                                 <h1
                                     ref={el => { titleLinesRef.current[0] = el; }}
                                     className="text-[12vw] tracking-tighter font-medium leading-[0.9]">Full Stack</h1>
@@ -226,7 +235,7 @@ const HeroSection = () => {
                                     ref={el => { titleLinesRef.current[1] = el; }}
                                      className="text-[12vw] font-medium leading-[0.9]">Developer</h1>
                                 <div
-                                    ref={circularTextRef} 
+                                    ref={circularTextRef}
                                     className='absolute right-0 top-[-10%]'>
                                     <CircularText
                                         text="CODE*CREATE*INNOVATE*"
@@ -236,70 +245,79 @@ const HeroSection = () => {
                                     />
                                 </div>
                             </div>
+                            <p
+                                ref={taglineRef}
+                                className="text-base md:text-lg text-white/50 max-w-xl mb-8 mx-1">
+                                Building performant web &amp; mobile experiences with modern technologies.
+                            </p>
                         </div>
                         <div className="flex items-center">
                             <div
                                 ref={locationLineRef}
-                                className="h-[1px] w-[60px] bg-white mr-4"></div>
+                                className="h-[1px] w-[60px] bg-brand mr-4"></div>
                             <p
                                 ref={locationTextRef}
                                 className="text-base md:text-lg text-white/70">Based in {SITE_CONFIG.location}</p>
                         </div>
-                        <div className='mt-8 flex items-center gap-4'>
+                        <div className='mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6'>
                             <Link
                                 ref={ctaButtonRef}
                                 href={SITE_CONFIG.resumeUrl}
-                                className='group z-50 relative inline-flex items-center px-8 py-4 text-sm font-medium tracking-wider uppercase text-white/90 border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden hover:text-white rounded-[4px]'>
-                                <span className='absolute inset-0 bg-gradient-to-r from-white/5 to-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out'></span>
+                                className='group z-50 relative inline-flex items-center px-8 py-4 text-sm font-medium tracking-wider uppercase text-white/90 border border-brand/30 hover:border-brand/60 transition-all duration-500 overflow-hidden hover:text-white rounded-[4px]'>
+                                <span className='absolute inset-0 bg-gradient-to-r from-brand/5 to-brand/15 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out'></span>
                                 <span className='relative z-10'>View My Resume</span>
                                 <span className='relative z-10 ml-2 transform group-hover:translate-x-1 transition-transform duration-300'>→</span>
                             </Link>
-                            <div className='flex gap-4'>
+                            <div className='flex gap-5'>
                                 <Link
                                     ref={el => { socialIconsRef.current[0] = el; }}
                                     href={SITE_CONFIG.social.github}
                                     target="_blank"
-                                    className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
-                                    <FaGithub size={42} />
+                                    style={{ animation: 'float 3s ease-in-out infinite' }}
+                                    className='z-50 text-white/60 hover:text-brand hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(18,247,214,0.3)] transition-all duration-300'>
+                                    <FaGithub size={22} />
                                 </Link>
                                 <Link
                                     ref={el => { socialIconsRef.current[1] = el; }}
                                     href={SITE_CONFIG.social.linkedin}
                                     target="_blank"
-                                    className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
-                                    <FaLinkedin size={42} />
+                                    style={{ animation: 'float 3s ease-in-out 0.4s infinite' }}
+                                    className='z-50 text-white/60 hover:text-brand hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(18,247,214,0.3)] transition-all duration-300'>
+                                    <FaLinkedin size={22} />
                                 </Link>
                                 <Link
                                     ref={el => { socialIconsRef.current[2] = el; }}
                                     href={SITE_CONFIG.social.twitter}
                                     target="_blank"
-                                    className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
-                                    <FaTwitter size={42} />
+                                    style={{ animation: 'float 3s ease-in-out 0.8s infinite' }}
+                                    className='z-50 text-white/60 hover:text-brand hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(18,247,214,0.3)] transition-all duration-300'>
+                                    <FaTwitter size={22} />
                                 </Link>
                                 <Link
                                     ref={el => { socialIconsRef.current[3] = el; }}
                                     href={`mailto:${SITE_CONFIG.email}`}
-                                    className='z-50 cursor-pointer hover:translate-x-1 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300'>
-                                    <FaEnvelope size={42} />
+                                    style={{ animation: 'float 3s ease-in-out 1.2s infinite' }}
+                                    className='z-50 text-white/60 hover:text-brand hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(18,247,214,0.3)] transition-all duration-300'>
+                                    <FaEnvelope size={22} />
                                 </Link>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div
-                    ref={scrollIndicatorRef} 
+                    ref={scrollIndicatorRef}
                     className="flex flex-col items-center pb-8 group cursor-pointer">
                     <div className="relative overflow-hidden">
-                        <p className="text-white/80 text-sm font-medium tracking-[0.2em] uppercase transition-all duration-500 group-hover:text-white group-hover:tracking-[0.3em]">
+                        <p className="text-white/80 text-sm font-medium tracking-[0.2em] uppercase transition-all duration-500 group-hover:text-brand group-hover:tracking-[0.3em]">
                             Scroll
                         </p>
-                        <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-500 group-hover:w-full"></div>
+                        <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-brand transition-all duration-500 group-hover:w-full"></div>
                     </div>
                     <div className="mt-4 relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-sm opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-brand rounded-full blur-sm opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
                         <BsArrowDown
                             size={18}
-                            className="text-white/70 group-hover:text-white transition-all duration-500 animate-bounce group-hover:animate-pulse relative z-10 group-hover:scale-110"
+                            className="text-white/70 group-hover:text-brand transition-all duration-500 animate-bounce group-hover:animate-pulse relative z-10 group-hover:scale-110"
                         />
                     </div>
                 </div>

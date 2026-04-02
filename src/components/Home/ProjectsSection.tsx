@@ -66,7 +66,7 @@ const ProjectsSection = () => {
                                 Selected Work
                             </h2>
                             <div className='flex items-center mb-16'>
-                                <div className="h-px w-16 bg-white/30 mr-6"></div>
+                                <div className="h-px w-16 bg-brand/40 mr-6"></div>
                                 <p className="text-lg lg:text-xl text-white/70">
                                     Projects that showcase my expertise
                                 </p>

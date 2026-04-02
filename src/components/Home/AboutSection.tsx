@@ -105,15 +105,8 @@ const AboutSection = () => {
                 boxShadow: '0 -20px 40px rgba(0,0,0,0.1)'
             }}
         >
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-purple-500/8 to-gray-500/5"></div>
-            
-            {/* Subtle background pattern */}
-            <div className="absolute inset-0 opacity-10" 
-                 style={{
-                     backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%)',
-                 }}>
-            </div>
+            {/* Subtle background glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-brand/3 via-transparent to-brand/2"></div>
 
             <div className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-16 items-center relative z-10">
                 {/* Content */}
@@ -131,12 +124,12 @@ const AboutSection = () => {
 
                     {/* Skills or stats */}
                     <div className="grid grid-cols-2 gap-6">
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-all duration-300 group">
-                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">10+</h3>
+                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl hover:bg-white/10 hover:border-brand/20 transition-all duration-300 group">
+                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-brand transition-colors">10+</h3>
                             <p className="text-gray-400 group-hover:text-gray-300 transition-colors">Projects Completed</p>
                         </div>
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-all duration-300 group">
-                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">2+</h3>
+                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl hover:bg-white/10 hover:border-brand/20 transition-all duration-300 group">
+                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-brand transition-colors">2+</h3>
                             <p className="text-gray-400 group-hover:text-gray-300 transition-colors">Years Experience</p>
                         </div>
                     </div>
@@ -145,18 +138,13 @@ const AboutSection = () => {
                 {/* 3D Visual Section */}
                 <div ref={imageRef} className="flex justify-center items-center relative">
                     <div ref={threeDRef} className="relative w-full max-w-lg">
-                        {/* Glowing background for 3D scene */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-3xl blur-3xl transform scale-110"></div>
-                        
+                        {/* Subtle glow behind 3D scene */}
+                        <div className="absolute inset-0 bg-brand/10 rounded-3xl blur-3xl transform scale-110"></div>
+
                         {/* 3D Scene Container */}
                         <div className="relative bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-2xl">
                             <FloatingShapes3D />
                         </div>
-
-                        {/* Floating accent elements around 3D scene */}
-                        <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full opacity-60 animate-pulse"></div>
-                        <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full opacity-50 animate-bounce" style={{ animationDelay: '0.5s' }}></div>
-                        <div className="absolute top-1/2 -right-8 w-6 h-6 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full opacity-40 animate-ping" style={{ animationDelay: '1s' }}></div>
                     </div>
                 </div>
             </div>

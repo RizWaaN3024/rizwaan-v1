@@ -117,7 +117,7 @@ const ExperienceSection = () => {
                                 Experience
                             </h2>
                             <div className='flex items-center mb-16'>
-                                <div className="h-px w-16 bg-white/30 mr-6"></div>
+                                <div className="h-px w-16 bg-brand/40 mr-6"></div>
                                 <p className="text-lg lg:text-xl text-white/70">
                                     2+ years building production-ready applications
                                 </p>
@@ -133,12 +133,12 @@ const ExperienceSection = () => {
                         {/* Progress Line */}
                         <div
                             ref={timelineLineRef}
-                            className='w-full bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500 origin-top shadow-lg shadow-blue-400/20'
+                            className='w-full bg-brand origin-top shadow-lg shadow-brand/20'
                             style={{ height: '100%' }}
                         />
-                        
+
                         {/* Animated pulse at the end of progress line */}
-                        <div className='absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-pink-500 rounded-full animate-pulse shadow-lg shadow-pink-500/50' />
+                        <div className='absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-brand rounded-full animate-pulse shadow-lg shadow-brand/50' />
                     </div>
 
                     {/* Timeline Items */}
@@ -172,8 +172,8 @@ const ExperienceSection = () => {
                                         <div
                                             data-dot={index}
                                             className={`w-6 h-6 rounded-full border-4 border-gray-900 z-10 transition-all duration-300
-                                                ${activeExperience === index 
-                                                    ? 'bg-gradient-to-r from-blue-400 to-purple-500 shadow-lg shadow-blue-400/50 scale-110' 
+                                                ${activeExperience === index
+                                                    ? 'bg-brand shadow-lg shadow-brand/50 scale-110'
                                                     : 'bg-white/20'
                                                 }`}
                                         />
@@ -185,13 +185,13 @@ const ExperienceSection = () => {
                                         className={`w-full lg:w-5/12 ${isLeft ? 'lg:order-3' : 'lg:order-1 lg:pl-8'}`}
                                     >
                                         <div className={`relative p-8 bg-gradient-to-br from-white/5 to-white/10 rounded-2xl border border-white/10 backdrop-blur-sm transition-all duration-300
-                                            ${activeExperience === index ? 'ring-1 ring-blue-400/30 shadow-xl shadow-blue-400/10 scale-105' : 'hover:scale-102'}
+                                            ${activeExperience === index ? 'ring-1 ring-brand/30 shadow-xl shadow-brand/10 scale-105' : 'hover:scale-102'}
                                         `}>
                                             {/* Mobile Timeline Dot */}
                                             <div className='lg:hidden mb-6 flex justify-center'>
                                                 <div className={`w-4 h-4 rounded-full
-                                                    ${activeExperience === index 
-                                                        ? 'bg-gradient-to-r from-blue-400 to-purple-500' 
+                                                    ${activeExperience === index
+                                                        ? 'bg-brand'
                                                         : 'bg-white/30'
                                                     }`}
                                                 />
@@ -204,12 +204,12 @@ const ExperienceSection = () => {
                                                         {experience.company}
                                                     </h3>
                                                     {experience.current && (
-                                                        <span className='px-3 py-1 text-xs bg-gradient-to-r from-green-400/20 to-emerald-400/20 text-green-300 rounded-full border border-green-400/30 animate-pulse'>
+                                                        <span className='px-3 py-1 text-xs bg-brand/10 text-brand rounded-full border border-brand/30'>
                                                             Present
                                                         </span>
                                                     )}
                                                 </div>
-                                                <h4 className='text-xl text-blue-300 font-medium mb-4'>
+                                                <h4 className='text-xl text-brand/80 font-medium mb-4'>
                                                     {experience.role}
                                                 </h4>
                                                 
@@ -244,7 +244,7 @@ const ExperienceSection = () => {
                                                             key={achIndex}
                                                             className='flex items-start gap-3 text-white/70 text-sm leading-relaxed'
                                                         >
-                                                            <div className='w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0' />
+                                                            <div className='w-1.5 h-1.5 bg-brand rounded-full mt-2 flex-shrink-0' />
                                                             <span>{achievement}</span>
                                                         </li>
                                                     ))}
@@ -260,7 +260,7 @@ const ExperienceSection = () => {
                                                     {experience.tech.map((tech, techIndex) => (
                                                         <span
                                                             key={techIndex}
-                                                            className="px-3 py-1 bg-white/10 text-white/80 text-sm rounded-lg border border-white/20 hover:border-blue-400/30 transition-colors duration-200"
+                                                            className="px-3 py-1 bg-white/10 text-white/80 text-sm rounded-lg border border-white/20 hover:border-brand/30 transition-colors duration-200"
                                                         >
                                                             {tech}
                                                         </span>

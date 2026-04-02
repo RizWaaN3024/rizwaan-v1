@@ -9,12 +9,14 @@ const AnimatedNavbar = () => {
     const overlayRef = useRef<HTMLDivElement>(null);
     const navItemsRef = useRef<(HTMLElement | null)[]>([]);
     const hamburgerRef = useRef<HTMLButtonElement>(null);
+    const closeRef = useRef<HTMLButtonElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
     useEffect(() => {
         timelineRef.current = gsap.timeline({ paused: true });
         timelineRef.current
             .set(overlayRef.current, { display: 'flex' })
+            .set(closeRef.current, { opacity: 0, rotation: -90, scale: 0 })
             .fromTo(overlayRef.current,
                 { clipPath: 'circle(0% at 95% 5%)' },
                 {
@@ -23,6 +25,13 @@ const AnimatedNavbar = () => {
                     ease: 'power2.inOut'
                 }
             )
+            .to(closeRef.current, {
+                opacity: 1,
+                rotation: 0,
+                scale: 1,
+                duration: 0.4,
+                ease: 'back.out(2)'
+            }, '-=0.4')
             .fromTo(navItemsRef.current,
                 {
                     y: 100,
@@ -70,9 +79,9 @@ const AnimatedNavbar = () => {
             ease: 'power2.out'
         });
         if (newState) {
-            timelineRef.current?.play();
+            timelineRef.current?.timeScale(1).play();
         } else {
-            timelineRef.current?.reverse();
+            timelineRef.current?.timeScale(1.8).reverse();
         }
     };
 
@@ -94,7 +103,7 @@ const AnimatedNavbar = () => {
                         <button
                             ref={hamburgerRef}
                             onClick={toggleNav}
-                            className="relative z-[100] w-8 h-8 flex flex-col justify-between mix-blend-difference"
+                            className="relative z-[100] w-8 h-8 flex flex-col justify-between mix-blend-difference cursor-pointer"
                             aria-label="Toggle menu"
                         >
                             <span className="w-full h-0.5 bg-white transform transition-transform origin-center"></span>
@@ -108,9 +117,20 @@ const AnimatedNavbar = () => {
             {/* Fullscreen Navigation Overlay */}
             <div
                 ref={overlayRef}
-                className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-purple-900 z-[100] hidden items-center justify-center"
+                className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-gray-800 z-[100] hidden items-center justify-center"
                 style={{ clipPath: 'circle(0% at 95% 5%)' }}
             >
+                {/* Close Button */}
+                <button
+                    ref={closeRef}
+                    onClick={toggleNav}
+                    className="absolute top-6 right-6 lg:right-12 z-10 w-10 h-10 flex items-center justify-center cursor-pointer group"
+                    aria-label="Close menu"
+                >
+                    <span className="absolute w-6 h-0.5 bg-white rotate-45 transition-all duration-300 group-hover:bg-brand group-hover:scale-110"></span>
+                    <span className="absolute w-6 h-0.5 bg-white -rotate-45 transition-all duration-300 group-hover:bg-brand group-hover:scale-110"></span>
+                </button>
+
                 <div className="text-center">
                     <ul className="space-y-8">
                         {NAV_LINKS.map((item, index) => (
@@ -122,7 +142,7 @@ const AnimatedNavbar = () => {
                                 <a
                                     href={item.link}
                                     onClick={() => toggleNav()}
-                                    className="inline-block text-6xl md:text-8xl font-bold text-white hover:text-purple-400 transition-colors duration-300 transform hover:scale-110 hover:rotate-2"
+                                    className="inline-block text-6xl md:text-8xl font-bold text-white hover:text-brand hover:translate-x-4 hover:scale-105 transition-all duration-500 ease-out"
                                 >
                                     {item.label}
                                 </a>
@@ -143,7 +163,7 @@ const AnimatedNavbar = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 ref={el => { navItemsRef.current[NAV_LINKS.length + index] = el; }}
-                                className="text-white/60 hover:text-white text-lg transition-colors duration-300"
+                                className="text-white/60 hover:text-brand text-lg transition-all duration-500 ease-out"
                             >
                                 {social.label}
                             </a>
@@ -153,8 +173,8 @@ const AnimatedNavbar = () => {
 
                 {/* Background Elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
-                    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+                    <div className="absolute -top-40 -right-40 w-80 h-80 bg-brand/10 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-brand/5 rounded-full blur-3xl"></div>
                 </div>
             </div>
         </>

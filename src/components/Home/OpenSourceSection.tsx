@@ -96,7 +96,7 @@ const OpenSourceSection = () => {
         switch (status) {
             case 'Merged': return 'text-green-400 bg-green-400/10 border-green-400/30';
             case 'Review': return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30';
-            case 'Active Contributor': return 'text-blue-400 bg-blue-400/10 border-blue-400/30';
+            case 'Active Contributor': return 'text-brand bg-brand/10 border-brand/30';
             default: return 'text-white/60 bg-white/10 border-white/20';
         }
     };
@@ -116,7 +116,7 @@ const OpenSourceSection = () => {
                                 Open Source
                             </h2>
                             <div className='flex items-center mb-16'>
-                                <div className="h-px w-16 bg-white/30 mr-6"></div>
+                                <div className="h-px w-16 bg-brand/40 mr-6"></div>
                                 <p className="text-lg lg:text-xl text-white/70">
                                     Contributing to the community, one commit at a time
                                 </p>
@@ -141,12 +141,12 @@ const OpenSourceSection = () => {
                                         data-program={index}
                                         className={`relative p-6 bg-gradient-to-br from-white/5 to-white/10 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:scale-105
                                             ${program.current
-                                                ? 'border-blue-400/30 ring-1 ring-blue-400/20 shadow-lg shadow-blue-400/10'
+                                                ? 'border-brand/30 ring-1 ring-brand/20 shadow-lg shadow-brand/10'
                                                 : 'border-white/10 hover:border-white/20'
                                             }`}
                                     >
                                         {program.current && (
-                                            <div className='absolute -top-2 -right-2 w-4 h-4 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50' />
+                                            <div className='absolute -top-2 -right-2 w-4 h-4 bg-brand rounded-full animate-pulse shadow-lg shadow-brand/50' />
                                         )}
 
                                         <div className='flex items-start gap-4 mb-4'>
@@ -169,7 +169,7 @@ const OpenSourceSection = () => {
                                             <div className='flex items-center gap-2 mb-2'>
                                                 <Github size={16} className='text-white/60' />
                                                 <span className='font-medium text-white'>{program.project}</span>
-                                                <span className='text-blue-400 text-sm'>{program.contributions}</span>
+                                                <span className='text-brand text-sm'>{program.contributions}</span>
                                             </div>
                                             <p className='text-sm text-white/70 ml-6'>{program.projectDescription}</p>
                                         </div>
@@ -204,7 +204,7 @@ const OpenSourceSection = () => {
                                         <div className='flex flex-col lg:flex-row lg:items-center gap-4'>
                                             <div className='flex-1'>
                                                 <div className='flex items-center gap-3 mb-2'>
-                                                    <GitPullRequest size={18} className='text-blue-400' />
+                                                    <GitPullRequest size={18} className='text-brand' />
                                                     <h4 className='font-medium text-white'>{contribution.title}</h4>
                                                     <span className={`px-2 py-1 text-xs rounded border ${getStatusColor(contribution.status)}`}>
                                                         {contribution.status}
@@ -258,7 +258,7 @@ const OpenSourceSection = () => {
                                     {GITHUB_STATS.languagesContributed.map((lang, index) => (
                                         <span
                                             key={index}
-                                            className="px-3 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white/90 text-sm rounded-lg border border-blue-400/30"
+                                            className="px-3 py-2 bg-brand/10 text-white/90 text-sm rounded-lg border border-brand/20"
                                         >
                                             {lang}
                                         </span>
