@@ -17,14 +17,14 @@ export default function Home() {
             <div className="sticky top-0 z-20">
                 <AboutSection />
             </div>
+            <div className="relative z-30">
+                <ExperienceSection />
+            </div>
             {/* <div className="relative z-30">
                 <SkillsSection />
             </div> */}
             <div className="relative z-40">
                 <ProjectsSection />
-            </div>
-            <div className="relative z-40">
-                <ExperienceSection />
             </div>
             <div className="relative z-40">
                 <OpenSourceSection />
