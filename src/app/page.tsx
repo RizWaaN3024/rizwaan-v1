@@ -5,6 +5,7 @@ import OpenSourceSection from "@/components/Home/OpenSourceSection";
 import ProjectsSection from "@/components/Home/ProjectsSection";
 import SkillsSection from "@/components/Home/SkillsSection";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function Home() {
     return (
@@ -28,6 +29,9 @@ export default function Home() {
             </div>
             <div className="relative z-40">
                 <OpenSourceSection />
+            </div>
+            <div className="relative z-40">
+                <Footer />
             </div>
         </main>
     );

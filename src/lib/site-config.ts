@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   firstName: 'Rizwaan',
   role: 'Full Stack Developer',
   location: 'Bengaluru, India',
-  email: 'rizwaanans786@gmail.com',
+  email: 'rizwaan.ansari@proton.me',
   phone: '+91 8967458695',
   resumeUrl: '/',
 
