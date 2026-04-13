@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
   location: 'Bengaluru, India',
   email: 'rizwaan.ansari@proton.me',
   phone: '+91 8967458695',
-  resumeUrl: '/',
+  resumeUrl: '/resume',
 
   social: {
     github: 'https://github.com/RizWaaN3024',
