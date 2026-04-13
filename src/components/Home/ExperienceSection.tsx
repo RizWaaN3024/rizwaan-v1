@@ -70,6 +70,7 @@ const ExperienceSection = () => {
     return (
         <section
             ref={sectionRef}
+            id="experience"
             className="relative bg-black"
         >
             <div className="lg:container mx-auto px-5 sm:px-6 py-16 sm:py-24 lg:py-32">

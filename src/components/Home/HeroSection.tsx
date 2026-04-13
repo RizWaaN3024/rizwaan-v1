@@ -3,10 +3,12 @@ import Link from 'next/link';
 import { BsArrowDown } from 'react-icons/bs';
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import CircularText from '../CircularText';
-import SplashCursor from '../SplashCursor';
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { SITE_CONFIG } from '@/lib/site-config';
+
+const SplashCursor = dynamic(() => import('../SplashCursor'), { ssr: false });
 
 const HeroSection = () => {
     const [showContent, setShowContent] = useState(false);
@@ -23,6 +25,22 @@ const HeroSection = () => {
     const scrollIndicatorRef = useRef<HTMLDivElement>(null);
     const circularTextRef = useRef<HTMLDivElement>(null);
     const taglineRef = useRef<HTMLParagraphElement>(null);
+    const [enableCursor, setEnableCursor] = useState(false);
+
+    // Only run SplashCursor when Hero is in view AND on desktop
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+            && window.matchMedia('(pointer: fine)').matches;
+        if (!isDesktop || !heroRef.current) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => setEnableCursor(entry.isIntersecting),
+            { threshold: 0.1 }
+        );
+        observer.observe(heroRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const tl = gsap.timeline({
@@ -322,7 +340,7 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                <SplashCursor />
+                {enableCursor && <SplashCursor />}
             </section>
         </>
     )

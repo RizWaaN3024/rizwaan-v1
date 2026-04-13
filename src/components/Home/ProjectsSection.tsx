@@ -84,6 +84,7 @@ const ProjectsSection = () => {
     return (
         <section
             ref={sectionRef}
+            id="projects"
             className="relative bg-black"
         >
             <div className="lg:container mx-auto px-5 sm:px-6">
