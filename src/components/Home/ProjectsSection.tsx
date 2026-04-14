@@ -17,37 +17,26 @@ const ProjectsSection = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Section header animations
-            gsap.fromTo(dividerRef.current,
-                { scaleX: 0, transformOrigin: 'left center' },
-                {
-                    scaleX: 1,
-                    duration: 0.8,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 75%",
-                        toggleActions: "play none none reverse"
-                    }
+            // Header — combined timeline, one trigger, plays once
+            const headerTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                    once: true,
                 }
-            );
+            });
+            headerTl
+                .fromTo(dividerRef.current,
+                    { scaleX: 0, transformOrigin: 'left center' },
+                    { scaleX: 1, duration: 0.8, ease: "power2.out" }
+                )
+                .fromTo(headingRef.current,
+                    { y: 50, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                    '-=0.6'
+                );
 
-            gsap.fromTo(headingRef.current,
-                { y: 50, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 70%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-
-            // Project scroll triggers
+            // Active project tracking (keep per-project triggers — needed for counter)
             PROJECTS.forEach((_, index) => {
                 ScrollTrigger.create({
                     trigger: `[data-project="${index}"]`,
@@ -58,24 +47,22 @@ const ProjectsSection = () => {
                 });
             });
 
-            // Project reveal animations
-            gsap.utils.toArray<Element>('[data-project]').forEach((project) => {
-                gsap.fromTo(project,
-                    { opacity: 0.4, y: 50 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: project,
-                            start: "top 70%",
-                            end: "bottom 30%",
-                            toggleActions: "play none none reverse"
-                        }
+            // Project reveal — batched, plays once
+            gsap.fromTo('[data-project]',
+                { opacity: 0.4, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: '[data-project]',
+                        start: "top 80%",
+                        once: true,
                     }
-                );
-            });
+                }
+            );
         }, sectionRef);
 
         return () => ctx.revert();

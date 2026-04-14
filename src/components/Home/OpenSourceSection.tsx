@@ -13,7 +13,7 @@ const OpenSourceSection = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Header animation
+            // Header — one trigger, plays once
             gsap.fromTo('.opensource-header',
                 { opacity: 0, y: 30 },
                 {
@@ -23,70 +23,62 @@ const OpenSourceSection = () => {
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: '.opensource-header',
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
+                        start: "top 85%",
+                        once: true,
                     }
                 }
             );
 
-            // Animate program cards
-            gsap.utils.toArray<Element>('[data-program]').forEach((card, index) => {
-                gsap.fromTo(card,
-                    { opacity: 0, y: 50, scale: 0.9 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 0.8,
-                        ease: "back.out(1.2)",
-                        delay: index * 0.2,
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 80%",
-                            toggleActions: "play none none reverse"
-                        }
+            // Programs — one batched trigger with stagger
+            gsap.fromTo('[data-program]',
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.7,
+                    ease: "power3.out",
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: '[data-program]',
+                        start: "top 85%",
+                        once: true,
                     }
-                );
-            });
+                }
+            );
 
-            // Animate contribution cards
-            gsap.utils.toArray<Element>('[data-contribution]').forEach((card, index) => {
-                gsap.fromTo(card,
-                    { opacity: 0, x: index % 2 === 0 ? -30 : 30 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.6,
-                        ease: "power3.out",
-                        delay: index * 0.1,
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 85%",
-                            toggleActions: "play none none reverse"
-                        }
+            // Contributions — one batched trigger with stagger
+            gsap.fromTo('[data-contribution]',
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power3.out",
+                    stagger: 0.08,
+                    scrollTrigger: {
+                        trigger: '[data-contribution]',
+                        start: "top 85%",
+                        once: true,
                     }
-                );
-            });
+                }
+            );
 
-            // Animate stats
-            gsap.utils.toArray<Element>('[data-stat]').forEach((stat, index) => {
-                gsap.fromTo(stat,
-                    { opacity: 0, y: 20 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.5,
-                        ease: "power2.out",
-                        delay: index * 0.1,
-                        scrollTrigger: {
-                            trigger: stat,
-                            start: "top 90%",
-                            toggleActions: "play none none reverse"
-                        }
+            // Stats — one batched trigger
+            gsap.fromTo('[data-stat]',
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                    stagger: 0.08,
+                    scrollTrigger: {
+                        trigger: '[data-stat]',
+                        start: "top 90%",
+                        once: true,
                     }
-                );
-            });
-
+                }
+            );
         }, sectionRef);
 
         return () => ctx.revert();

@@ -141,7 +141,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link
                         href="/"
-                        className="relative z-50 text-lg font-medium text-white hover:text-brand transition-colors duration-500 ease-out mix-blend-difference"
+                        className="relative z-50 text-lg font-medium text-white hover:text-brand transition-colors duration-500 ease-out"
                     >
                         {SITE_CONFIG.firstName}
                         <span className="text-brand">.</span>
@@ -185,7 +185,7 @@ const Navbar = () => {
                     <button
                         ref={hamburgerRef}
                         onClick={toggleNav}
-                        className="md:hidden relative z-[110] w-8 h-6 flex flex-col justify-center gap-[5px] cursor-pointer mix-blend-difference"
+                        className="md:hidden relative z-[110] w-8 h-6 flex flex-col justify-center gap-[5px] cursor-pointer"
                         aria-label="Toggle menu"
                     >
                         <span className="w-full h-[1.5px] bg-white origin-center"></span>

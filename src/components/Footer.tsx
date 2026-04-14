@@ -1,62 +1,180 @@
 "use client";
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState } from 'react';
+import { toast } from 'sonner';
 import { SITE_CONFIG } from '@/lib/site-config';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Link from 'next/link';
+import { contactSchema } from '@/lib/contact-schema';
 
-gsap.registerPlugin(ScrollTrigger);
+type FormFieldProps = {
+    id: string;
+    label: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    error?: string;
+    disabled?: boolean;
+    placeholder?: string;
+    type?: string;
+    textarea?: boolean;
+    rows?: number;
+    counter?: { value: number; max: number };
+};
+
+const FormField = ({
+    id,
+    label,
+    value,
+    onChange,
+    error,
+    disabled,
+    placeholder,
+    type = 'text',
+    textarea = false,
+    rows = 4,
+    counter,
+}: FormFieldProps) => {
+    const hasError = Boolean(error);
+    const filled = value.length > 0;
+
+    const sharedInputCls = `peer w-full bg-transparent text-white text-base sm:text-lg py-3 focus:outline-none placeholder:text-white/20 disabled:opacity-50 caret-brand`;
+
+    return (
+        <div className="group relative">
+            <div className="flex items-baseline justify-between mb-3">
+                <label
+                    htmlFor={id}
+                    className={`block text-xs sm:text-sm uppercase tracking-[0.2em] transition-colors duration-500 ${
+                        hasError ? 'text-red-400/80' : filled ? 'text-brand/70' : 'text-white/30 group-focus-within:text-brand/70'
+                    }`}
+                >
+                    {label}
+                </label>
+                {counter && (
+                    <span className={`text-[10px] tabular-nums tracking-wider transition-colors duration-500 ${
+                        counter.value > counter.max * 0.9 ? 'text-brand/70' : 'text-white/20'
+                    }`}>
+                        {counter.value} / {counter.max}
+                    </span>
+                )}
+            </div>
+
+            <div className="relative">
+                {textarea ? (
+                    <textarea
+                        id={id}
+                        name={id}
+                        value={value}
+                        onChange={onChange}
+                        disabled={disabled}
+                        rows={rows}
+                        placeholder={placeholder}
+                        className={`${sharedInputCls} resize-none`}
+                    />
+                ) : (
+                    <input
+                        id={id}
+                        name={id}
+                        type={type}
+                        value={value}
+                        onChange={onChange}
+                        disabled={disabled}
+                        placeholder={placeholder}
+                        className={sharedInputCls}
+                    />
+                )}
+
+                {/* Static baseline */}
+                <span className={`pointer-events-none absolute bottom-0 left-0 right-0 h-px transition-colors duration-500 ${
+                    hasError ? 'bg-red-400/40' : 'bg-white/15'
+                }`}></span>
+
+                {/* Animated brand underline — expands from left on focus */}
+                <span className={`pointer-events-none absolute bottom-0 left-0 h-[1.5px] origin-left scale-x-0 peer-focus:scale-x-100 transition-transform duration-500 ease-out ${
+                    hasError ? 'bg-red-400/60' : 'bg-brand'
+                }`} style={{ right: 0 }}></span>
+            </div>
+
+            {error && (
+                <p className="text-xs text-red-400/80 mt-2">{error}</p>
+            )}
+        </div>
+    );
+};
+
+const LOADING_LINES = [
+    'Sending your message via carrier pigeon...',
+    'Teaching an intern how to press Enter...',
+    'Packaging bytes into envelopes...',
+    'Rerouting through a chai stall...',
+];
 
 const Footer = () => {
-    const sectionRef = useRef(null);
-    const contentRef = useRef<HTMLDivElement>(null);
-
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: '',
+        website: '', // honeypot
     });
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: integrate email service later
-        console.log('Form submitted:', formData);
+        if (submitting) return;
+
+        // Client-side validation with fun messages
+        const parsed = contactSchema.safeParse(formData);
+        if (!parsed.success) {
+            const fieldErrors: Record<string, string> = {};
+            parsed.error.issues.forEach(issue => {
+                const key = String(issue.path[0] ?? '');
+                if (key && !fieldErrors[key]) fieldErrors[key] = issue.message;
+            });
+            setErrors(fieldErrors);
+            toast.error("Hold up — the form needs a little love.");
+            return;
+        }
+
+        setSubmitting(true);
+        const loadingLine = LOADING_LINES[Math.floor(Math.random() * LOADING_LINES.length)];
+        const toastId = toast.loading(loadingLine);
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(parsed.data),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                toast.error(data.error ?? 'Something broke. Probably my fault.', { id: toastId });
+                return;
+            }
+
+            toast.success("Got it! I'll respond before your next chai gets cold ☕", { id: toastId });
+            setFormData({ name: '', email: '', message: '', website: '' });
+            setErrors({});
+        } catch {
+            toast.error('The internet decided today is not the day. Try again?', { id: toastId });
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Single animation for the entire section content
-            gsap.fromTo(contentRef.current,
-                { y: 50, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 80%",
-                        toggleActions: "play none none none"
-                    }
-                }
-            );
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
         <footer
-            ref={sectionRef}
             id="contact"
             className="relative bg-black"
         >
@@ -64,7 +182,7 @@ const Footer = () => {
                 <div className="h-px bg-white/10"></div>
             </div>
 
-            <div ref={contentRef} className="lg:container mx-auto px-5 sm:px-6 pt-16 sm:pt-24 lg:pt-32 pb-6 sm:pb-8">
+            <div className="lg:container mx-auto px-5 sm:px-6 pt-16 sm:pt-24 lg:pt-32 pb-6 sm:pb-8">
                 <div className="max-w-6xl">
                     {/* Section label */}
                     <div className="flex items-center mb-10 sm:mb-16">
@@ -122,30 +240,67 @@ const Footer = () => {
                         </div>
 
                         {/* Right — form */}
-                        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
-                            <div>
-                                <label htmlFor="name" className="block text-xs sm:text-sm text-white/30 uppercase tracking-[0.2em] mb-3">Name</label>
-                                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required
-                                    className="w-full bg-transparent border-b border-white/15 text-white text-base sm:text-lg py-3 focus:outline-none focus:border-brand/50 transition-colors duration-500 placeholder:text-white/20"
-                                    placeholder="Your name" />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="block text-xs sm:text-sm text-white/30 uppercase tracking-[0.2em] mb-3">Email</label>
-                                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required
-                                    className="w-full bg-transparent border-b border-white/15 text-white text-base sm:text-lg py-3 focus:outline-none focus:border-brand/50 transition-colors duration-500 placeholder:text-white/20"
-                                    placeholder="your@email.com" />
-                            </div>
-                            <div>
-                                <label htmlFor="message" className="block text-xs sm:text-sm text-white/30 uppercase tracking-[0.2em] mb-3">Message</label>
-                                <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={4}
-                                    className="w-full bg-transparent border-b border-white/15 text-white text-base sm:text-lg py-3 focus:outline-none focus:border-brand/50 transition-colors duration-500 placeholder:text-white/20 resize-none"
-                                    placeholder="Tell me about your project..." />
-                            </div>
-                            <button type="submit"
-                                className="group relative inline-flex items-center px-8 py-4 text-sm font-medium tracking-wider uppercase text-white/90 border border-brand/30 hover:border-brand/60 transition-all duration-500 overflow-hidden hover:text-white rounded-[4px] cursor-pointer mt-2">
+                        <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-8">
+                            {/* Honeypot — hidden from humans, bots love it */}
+                            <input
+                                type="text"
+                                name="website"
+                                value={formData.website}
+                                onChange={handleChange}
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                                className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                            />
+
+                            <FormField
+                                id="name"
+                                label="Name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                error={errors.name}
+                                disabled={submitting}
+                                placeholder="Your name"
+                            />
+                            <FormField
+                                id="email"
+                                type="email"
+                                label="Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                error={errors.email}
+                                disabled={submitting}
+                                placeholder="your@email.com"
+                            />
+                            <FormField
+                                id="message"
+                                label="Message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                error={errors.message}
+                                disabled={submitting}
+                                placeholder="Tell me about your project..."
+                                textarea
+                                rows={4}
+                                counter={{ value: formData.message.length, max: 2000 }}
+                            />
+                            <button
+                                type="submit"
+                                disabled={submitting}
+                                className="group relative inline-flex items-center px-8 py-4 text-sm font-medium tracking-wider uppercase text-white/90 border border-brand/30 hover:border-brand/60 transition-all duration-500 overflow-hidden hover:text-white rounded-[4px] cursor-pointer mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                            >
                                 <span className="absolute inset-0 bg-gradient-to-r from-brand/5 to-brand/15 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 ease-out"></span>
-                                <span className="relative z-10">Send Message</span>
-                                <span className="relative z-10 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                                {submitting ? (
+                                    <>
+                                        <span className="relative z-10 inline-block w-3 h-3 border-2 border-brand/60 border-t-transparent rounded-full animate-spin mr-2"></span>
+                                        <span className="relative z-10">Sending...</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="relative z-10">Send Message</span>
+                                        <span className="relative z-10 ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+                                    </>
+                                )}
                             </button>
                         </form>
                     </div>
@@ -158,16 +313,7 @@ const Footer = () => {
                             Have a project in mind?
                         </p>
                         <div className="relative inline-block">
-                            <span
-                                className="text-[11vw] sm:text-[9vw] lg:text-[7vw] font-bold tracking-tight leading-none"
-                                style={{ WebkitTextStroke: '1.5px rgba(18, 247, 214, 0.3)', color: 'transparent' }}
-                            >
-                                LET&apos;S TALK
-                            </span>
-                            <span
-                                className="absolute inset-0 text-[11vw] sm:text-[9vw] lg:text-[7vw] font-bold tracking-tight leading-none text-brand opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out"
-                                aria-hidden
-                            >
+                            <span className="block text-[11vw] sm:text-[9vw] lg:text-[7vw] font-bold tracking-tight leading-none text-brand/25 group-hover:text-brand transition-colors duration-700 ease-out">
                                 LET&apos;S TALK
                             </span>
                         </div>

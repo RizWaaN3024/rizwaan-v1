@@ -47,76 +47,47 @@ const AboutSection = () => {
             }
         );
 
-        // Heading reveal
-        gsap.fromTo(headingRef.current,
-            { y: 60, opacity: 0 },
+        // Content reveal — single timeline, one trigger, plays once
+        const contentTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: "top 75%",
+                once: true,
+            }
+        });
+
+        contentTl
+            .fromTo(dividerRef.current,
+                { scaleX: 0, transformOrigin: 'left center' },
+                { scaleX: 1, duration: 0.8, ease: "power2.out" }
+            )
+            .fromTo(headingRef.current,
+                { y: 60, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                '-=0.6'
+            )
+            .fromTo(paragraphsRef.current.filter(Boolean),
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: "power3.out" },
+                '-=0.7'
+            );
+
+        // Stats — separate trigger since they're further down
+        gsap.fromTo(statsRef.current.filter(Boolean),
+            { y: 30, opacity: 0 },
             {
                 y: 0,
                 opacity: 1,
-                duration: 1,
+                duration: 0.6,
+                stagger: 0.08,
                 ease: "power3.out",
                 scrollTrigger: {
-                    trigger: section,
-                    start: "top 75%",
-                    toggleActions: "play none none reverse"
+                    trigger: statsRef.current[0],
+                    start: "top 90%",
+                    once: true,
                 }
             }
         );
-
-        // Divider line
-        gsap.fromTo(dividerRef.current,
-            { scaleX: 0, transformOrigin: 'left center' },
-            {
-                scaleX: 1,
-                duration: 0.8,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 70%",
-                    toggleActions: "play none none reverse"
-                }
-            }
-        );
-
-        // Paragraphs stagger
-        paragraphsRef.current.forEach((p, i) => {
-            if (!p) return;
-            gsap.fromTo(p,
-                { y: 40, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "power3.out",
-                    delay: i * 0.15,
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 65%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // Stats stagger
-        statsRef.current.forEach((stat, i) => {
-            if (!stat) return;
-            gsap.fromTo(stat,
-                { y: 30, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: "power3.out",
-                    delay: i * 0.1,
-                    scrollTrigger: {
-                        trigger: stat,
-                        start: "top 90%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
 
     }, []);
 

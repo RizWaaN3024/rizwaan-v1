@@ -14,54 +14,44 @@ const ExperienceSection = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Section header
-            gsap.fromTo(dividerRef.current,
-                { scaleX: 0, transformOrigin: 'left center' },
-                {
-                    scaleX: 1,
-                    duration: 0.8,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 75%",
-                        toggleActions: "play none none reverse"
-                    }
+            // Header — divider + heading in one timeline, one trigger
+            const headerTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                    once: true,
                 }
-            );
+            });
+            headerTl
+                .fromTo(dividerRef.current,
+                    { scaleX: 0, transformOrigin: 'left center' },
+                    { scaleX: 1, duration: 0.8, ease: "power2.out" }
+                )
+                .fromTo(headingRef.current,
+                    { y: 50, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+                    '-=0.6'
+                );
 
-            gsap.fromTo(headingRef.current,
-                { y: 50, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 70%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-
-            // Experience items stagger
-            itemsRef.current.forEach((item, i) => {
-                if (!item) return;
-                gsap.fromTo(item,
+            // Items — batched with stagger, plays once
+            const validItems = itemsRef.current.filter(Boolean);
+            if (validItems.length) {
+                gsap.fromTo(validItems,
                     { y: 50, opacity: 0 },
                     {
                         y: 0,
                         opacity: 1,
                         duration: 0.8,
                         ease: "power3.out",
+                        stagger: 0.12,
                         scrollTrigger: {
-                            trigger: item,
+                            trigger: validItems[0],
                             start: "top 85%",
-                            toggleActions: "play none none reverse"
+                            once: true,
                         }
                     }
                 );
-            });
+            }
         }, sectionRef);
 
         return () => ctx.revert();

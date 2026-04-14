@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "sonner";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import { SITE_CONFIG } from "@/lib/site-config";
@@ -32,6 +34,20 @@ export default function RootLayout({
 				<LenisProvider>
 					{children}
 				</LenisProvider>
+				<Toaster
+					position="bottom-right"
+					theme="dark"
+					toastOptions={{
+						style: {
+							background: '#0a0a0a',
+							border: '1px solid rgba(255,255,255,0.1)',
+							color: 'rgba(255,255,255,0.9)',
+							fontFamily: 'var(--font-geist-sans)',
+						},
+						className: 'font-medium',
+					}}
+				/>
+				<Analytics />
 			</body>
 		</html>
 	);
