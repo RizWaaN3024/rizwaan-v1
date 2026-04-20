@@ -3,6 +3,16 @@ import type { Project } from '@/types';
 export const PROJECTS: Project[] = [
   {
     id: '01',
+    title: 'Fleet Tracking Dashboard',
+    description: 'Real-time fleet tracking dashboard simulating thousands of vehicles with live GPS updates over WebSocket, GPU-rendered clustering via MapLibre, server-side geofence detection, and historical path queries. Built with production-grade reconnection, heartbeat, and graceful shutdown handling.',
+    tech: ['Next.js', 'MapLibre GL', 'WebSocket', 'Node.js'],
+    liveUrl: 'https://fleet-tracking-dashboard-flax.vercel.app',
+    githubUrl: 'https://github.com/RizWaaN3024/fleet-tracking-dashboard',
+    image: '/dashboard-ss.png',
+    year: '2026',
+  },
+  {
+    id: '02',
     title: 'E-commerce Platform',
     description: 'A full-stack e-commerce solution built with modern technologies. Features include user authentication, product management, shopping cart, payment integration, and admin dashboard.',
     tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
@@ -12,7 +22,7 @@ export const PROJECTS: Project[] = [
     year: '2024',
   },
   {
-    id: '02',
+    id: '03',
     title: 'Task Management App',
     description: 'A collaborative project management tool with real-time updates, drag-and-drop functionality, team collaboration features, and progress tracking.',
     tech: ['Next.js', 'TypeScript', 'Socket.io', 'PostgreSQL'],
@@ -22,7 +32,7 @@ export const PROJECTS: Project[] = [
     year: '2024',
   },
   {
-    id: '03',
+    id: '04',
     title: 'Social Media Dashboard',
     description: 'Analytics dashboard for social media management with data visualization, scheduling capabilities, and performance tracking.',
     tech: ['React', 'Express', 'Chart.js', 'MySQL'],
@@ -32,7 +42,7 @@ export const PROJECTS: Project[] = [
     year: '2023',
   },
   {
-    id: '04',
+    id: '05',
     title: 'Weather Forecast App',
     description: 'A sleek weather application with location-based forecasts, interactive maps, severe weather alerts, and detailed meteorological data.',
     tech: ['React Native', 'Redux', 'Weather API', 'Maps SDK'],
