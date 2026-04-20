@@ -24,9 +24,9 @@ export default function Home() {
             <div className="relative z-40">
                 <ProjectsSection />
             </div>
-            <div className="relative z-40">
+            {/* <div className="relative z-40">
                 <OpenSourceSection />
-            </div>
+            </div> */}
             <div className="relative z-40">
                 <Footer />
             </div>
