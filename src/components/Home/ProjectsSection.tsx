@@ -155,72 +155,85 @@ const ProjectsSection = () => {
                                     </span>
                                 </div>
 
-                                <div className="grid md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 items-center">
-                                    {/* Info */}
-                                    <div className="md:col-span-1 space-y-5 sm:space-y-6">
-                                        <div>
-                                            <div className="flex items-baseline gap-3 sm:gap-4 mb-3 sm:mb-4">
-                                                <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-medium leading-tight tracking-tight">
-                                                    {project.title}
-                                                </h3>
-                                                <span className="hidden lg:inline text-sm text-white/40">
-                                                    {project.year}
-                                                </span>
-                                            </div>
-                                            <p className="text-base sm:text-lg text-white/60 leading-relaxed">
-                                                {project.description}
-                                            </p>
+                                <div className="space-y-6 sm:space-y-8">
+                                    {/* Desktop meta bar above image */}
+                                    <div className="hidden lg:flex items-center justify-between text-xs uppercase tracking-[0.25em] text-white/30">
+                                        <span>{project.year}</span>
+                                        <span>/ {project.id}</span>
+                                    </div>
+
+                                    {/* Image — dominant, clickable to live site */}
+                                    <a
+                                        href={project.liveUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block relative overflow-hidden rounded-lg border border-white/5 group"
+                                    >
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            width={1600}
+                                            height={900}
+                                            className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-brand opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                                            <span>View Live</span>
+                                            <ExternalLink size={14} />
                                         </div>
+                                    </a>
 
-                                        {/* Tech */}
-                                        <p className="text-sm text-white/30">
-                                            {project.tech.join(' · ')}
+                                    {/* Title + description */}
+                                    <div className="grid md:grid-cols-5 gap-5 md:gap-10 pt-2">
+                                        <h3 className="md:col-span-3 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] tracking-tight">
+                                            {project.title}
+                                        </h3>
+                                        <p className="md:col-span-2 text-base sm:text-lg text-white/60 leading-relaxed">
+                                            {project.description}
                                         </p>
+                                    </div>
 
-                                        {/* Links */}
-                                        <div className="flex gap-6 sm:gap-8 pt-2">
+                                    {/* Tech chips + Links */}
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-6 border-t border-white/5">
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tech.map((t) => (
+                                                <span
+                                                    key={t}
+                                                    className="px-3 py-1.5 border border-white/10 text-[10px] sm:text-xs uppercase tracking-[0.15em] text-white/50"
+                                                >
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <div className="flex items-center gap-6 sm:gap-8">
                                             <a
                                                 href={project.liveUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="group flex items-center gap-2 text-sm text-white/60 hover:text-brand transition-all duration-500 ease-out"
+                                                className="group/link flex items-center gap-2 text-sm text-white/70 hover:text-brand transition-all duration-500 ease-out"
                                             >
-                                                <span className="uppercase tracking-[0.1em]">
+                                                <span className="uppercase tracking-[0.15em]">
                                                     Live Site
                                                 </span>
                                                 <ExternalLink
                                                     size={14}
-                                                    className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                                                    className="transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-300"
                                                 />
                                             </a>
                                             <a
                                                 href={project.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="group flex items-center gap-2 text-sm text-white/60 hover:text-brand transition-all duration-500 ease-out"
+                                                className="group/link flex items-center gap-2 text-sm text-white/70 hover:text-brand transition-all duration-500 ease-out"
                                             >
-                                                <span className="uppercase tracking-[0.1em]">
+                                                <span className="uppercase tracking-[0.15em]">
                                                     Code
                                                 </span>
                                                 <Github
                                                     size={14}
-                                                    className="transform group-hover:scale-110 transition-transform duration-300"
+                                                    className="transform group-hover/link:scale-110 transition-transform duration-300"
                                                 />
                                             </a>
-                                        </div>
-                                    </div>
-
-                                    {/* Image */}
-                                    <div className="md:col-span-2">
-                                        <div className="relative overflow-hidden rounded-lg group">
-                                            <Image
-                                                src={project.image}
-                                                alt={project.title}
-                                                width={800}
-                                                height={600}
-                                                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                         </div>
                                     </div>
                                 </div>
